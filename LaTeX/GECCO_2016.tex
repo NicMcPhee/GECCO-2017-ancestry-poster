@@ -1,0 +1,90 @@
+% Research Paper for GECCO 2015
+% by Nic McPhee, Kirbie Dramdahl, and David Donatucci
+
+\documentclass{sig-alternate}
+
+%\usepackage{parskip}
+%\usepackage{times} %For typeface
+%\usepackage{graphicx}
+%\usepackage{algorithm}
+%\usepackage{algorithm,algorithmic}
+%\usepackage[justification=centering]{caption}[2007/12/23]
+%\usepackage{url}
+\sloppy
+
+\setlength{\parindent}{0.5cm} 
+
+\newcommand{\citep}[1]{\cite{#1}}
+
+%\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\begin{document}
+
+\conferenceinfo{GECCO'16,} {July 20-24, 2016, Denver, CO, USA.}
+\CopyrightYear{2016}
+\crdata{TBA}
+\clubpenalty=10000
+\widowpenalty = 10000
+    
+\title{Impact of Crossover Bias in Genetic Programming}
+
+\numberofauthors{1}
+\author{
+\alignauthor
+Nicholas Freitag McPhee and Maggie M. Casale\\
+	\affaddr{Division of Science and Mathematics}\\
+	\affaddr{University of Minnesota, Morris}\\
+	\affaddr{Morris, MN USA-56267}\\
+	\email{\{mcphee, casal033\}@morris.umn.edu}
+}
+
+% This is more like how it "should" be done, but I think the previous approach might look nicer. They
+% may force us to change it, though, to make it easier to scrape information.
+
+%\numberofauthors{3}
+%\author{
+%\alignauthor
+%Nicholas Freitag McPhee\\
+%	\affaddr{Division of Science and Mathematics}\\
+%	\affaddr{University of Minnesota, Morris}\\
+%	\affaddr{Morris, MN USA-56267}\\
+%	\email{mcphee@morris.umn.edu}
+%\alignauthor
+%M. Kirbie Dramdahl\\
+%	\affaddr{Division of Science and Mathematics}\\
+%	\affaddr{University of Minnesota, Morris}\\
+%	\affaddr{Morris, MN USA-56267}\\
+%	\email{dramd002@morris.umn.edu}
+%\alignauthor
+%David Donatucci\\
+%	\affaddr{Division of Science and Mathematics}\\
+%	\affaddr{University of Minnesota, Morris}\\
+%	\affaddr{Morris, MN USA-56267}\\
+%	\email{donat056@morris.umn.edu}
+%}
+
+\maketitle
+
+\begin{abstract}
+
+\emph{We are submitting this in the hopes of it being a \textbf{poster} and not a paper. There's just not a separate mechanism for submitting specifically for posters. Thanks.}
+
+Previous work has demonstrated the utility of graph databases as a tool for collecting and analyzing ancestry in evolutionary computation runs. That work focused on sections of individual runs, where this poster illustrates the application of these ideas on the entirety of large runs (up to one million individuals) and combinations of multiple runs.
+
+This will include a graph showing \emph{all} the ancestors of the successful individuals from a variety of stack-based genetic programming runs on software synthesis problems. We'll demonstrate how these graphs can highlight critical moments in the evolutionary process, and use them to compare the dynamics when using different evolutionary tools, such as different selection mechanisms or representations.
+
+We'll also provide examples of the scripting used to load and analyze our evolutionary data into the the Titan graph database system. 
+
+%	\begin{itemize}
+%	
+%	\item Lexicase vs. Tournament Selection
+%	\item Success vs. Failure
+%	\item Tree-Based Examples
+%	\item Genetic Algorithm-Based Examples
+%	\item Using Titan
+%	
+%	\end{itemize}
+
+\end{abstract}
+
+\end{document}
