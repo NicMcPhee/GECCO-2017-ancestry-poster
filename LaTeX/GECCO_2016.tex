@@ -10,6 +10,7 @@
 %\usepackage{algorithm,algorithmic}
 %\usepackage[justification=centering]{caption}[2007/12/23]
 %\usepackage{url}
+\usepackage{todonotes}
 \sloppy
 
 \setlength{\parindent}{0.5cm} 
@@ -88,15 +89,28 @@ We can use graph databases to store and analyze ancestry information in runs, an
 \section{Examples}
 \label{sec:examples}
 
-Explain replace-space-with-newline? At the very least cite Helmuth GECCO 2015.
+We will illustrate these ideas by extracting and plotting the ancestors of the successful individuals in several runs of the replace-space-with-newline software synthesis problem~\cite{Helmuth:2015:GECCO,Helmuth:2015:dissertation} using lexicase selection~\cite{Helmuth:2014:ieeeTEC}. 
 
-Mention we use Graphviz/dot to draw the pictures.
-
-Examples: Long runs like autoconstruction, comparison of successful and unsuccessful and/or comparison of lexicase and tournament.
+Figure~\ref{fig:comparison}, for example, allows us to compare a successful (on the left) and an unsuccessful run (on the right). The successful run shows all the ancestors of that run's winners (i.e., individuals with total error 0); the unsuccessful run shows the ancestors of all individuals in the final generation. In this figure generations run from the initial random population at the top to the final generation at the bottom, one generation per row. Each ancestor individual is represented as a rectangle whose width is proportional to the number of selections that individual received and whose height is proportional to the number of its offspring that were individuals included in the ancestry graph. The ratio of width to number of selections is $1/5$ the ratio of height to number of ancestral children to keep the graph from getting too wide. The color of an individual is determined by its total error; 0 total error is bright green, moving through blues to bright red, which represents total error of 10,000 or greater. A directed edge in the graph indicates a parent-child relation, with the edge going from the parent down to the child.
 
 \begin{figure}
 \centering
-\includegraphics[height=\textheight]{../Figures/ancestors_RSWN_run5_2016_01_small.pdf}
+%\includegraphics[height=\textheight]{../Figures/ancestors_RSWN_run5_2016_01_small.pdf}
+\caption{Full ancestry trees for a successful (on left) and unsuccessful run (on right) of the replace-space-with-newline problem using lexicase selection. }
+\label{fig:comparison}
+\end{figure}
+
+
+
+\todo[inline]{Explain replace-space-with-newline? At the very least cite Helmuth GECCO 2015.}
+
+\todo[inline]{Mention we use Graphviz/dot to draw the pictures.}
+
+\todo[inline]{Examples: Long runs like autoconstruction, comparison of successful and unsuccessful and/or comparison of lexicase and tournament.}
+
+\begin{figure}
+\centering
+%\includegraphics[height=\textheight]{../Figures/ancestors_RSWN_run5_2016_01_small.pdf}
 \caption{Stuff}
 \label{fig:autoconstructionAncestry}
 \end{figure}
@@ -104,7 +118,7 @@ Examples: Long runs like autoconstruction, comparison of successful and unsucces
 \section{Tools}
 \label{sec:tools}
 
-A little about Titan/gremlin/tinkerpop? URLs for these tools in footnotes.
+\todo[inline]{A little about Titan/gremlin/tinkerpop? URLs for these tools in footnotes.}
 
 \section{Conclusion}
 \label{sec:conclusion}
