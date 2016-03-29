@@ -184,6 +184,24 @@ After that initial phase, the behavior in the unsuccessful run (Figure~\ref{fig:
 
 In the successful run (Figure~\ref{fig:success}), however, there are clear changes in the dynamics over time. By generation 14, the best individual is able to correctly solve 124 of the 200 test cases for replace-space-with-newline. Then starting around generation 59 there is a ``narrowing'' of the graph, with several highly selected (i.e., wide) individuals dominating the ancestry for the next ten generations. This narrowing represents an important ``discovery'' which leads to individuals that have zero error on an additional 9\% (18) of the test cases. The graph widens out again after that until the rapid convergence on the solution in the final generations. The graph also highlights three highly selected individuals in generation 87 where for the first time the best individual has zero error on an additional 18 test cases.
 
+\section{Filtering}
+\label{sec:filtering}
+
+While the large graphs of full runs can provide an excellent ``big picture'' 
+view of the run dynamics, there is \emph{so} much information that it can be
+difficult to isolate specific features. We can, however, extract and visualize
+subgraphs that focus on specific areas or events in the runs.
+
+One simple example of this sort of filtering that we've already introduced is
+looking only at individuals that are in fact ancestors of individuals in the
+final generation. Most individuals in the runs illustrated here don't go on to
+have 
+
+\section{Future work}
+\label{sec:futurework}
+
+Dynamic views would be nice.
+
 \bibliographystyle{abbrv}
 \bibliography{GECCO_2016}
 
