@@ -123,6 +123,7 @@ Here we use these tools to generate graphs showing \emph{all} the ancestors of s
 	</concept>
 	<concept>
 	<concept_id>10003120.10003145.10003147.10010364</concept_id>
+
 	<concept_desc>Human-centered computing~Scientific visualization</concept_desc>
 	<concept_significance>500</concept_significance>
 	</concept>
@@ -194,8 +195,21 @@ subgraphs that focus on specific areas or events in the runs.
 
 One simple example of this sort of filtering that we've already introduced is
 looking only at individuals that are in fact ancestors of individuals in the
-final generation. Most individuals in the runs illustrated here don't go on to
-have 
+final generation. Most individuals in evolutionary systems aren't ultimately
+ancestors of individuals in the final population; they're evolutionary ``dead ends'',
+either because they have no children, or their descendants eventually fail to have
+children. All the graphs provided so far have used this filtering to substantially
+cut down on the number of visualized nodes. This typically reduces the number of nodes in a
+generation (row of the graph) from the original 1,000 to 300 or less, and sometimes down
+to a few dozen.
+
+\begin{figure*}[tb]
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{../Figures/lex_run0_RBM_color_filtered_and_full_30000.pdf}
+	\end{center}
+	\caption{Unfiltered (left) and filtered (right) versions of a successful lexicase run, both with the same color map.}
+	\label{fig:lexRun0FilteredAndFull}
+\end{figure*}
 
 \section{Future work}
 \label{sec:futurework}
