@@ -94,20 +94,6 @@
 
 \begin{abstract}
 
-\todo[inline]{We are submitting this in the hopes of it being a \textbf{poster} and not a paper. There's just not a separate mechanism for submitting specifically for posters.
-
-~
-
-We've tried to keep this close to 2 pages, which is the limit we'll have if this is in fact accepted as a poster. As a result, this submission only includes two of our smaller ancestry graphs. Our intent is for the the poster to include at least one much larger graph, showing the complete ancestry of the winners for a run with nearly 1,000 generations, along with several other comparisons, such as the dynamics of lexicase vs. tournament selection.
-
-~
-
-The graphs we have included are PDF vector graphics and support very high levels of zooming if your PDF viewer allows it.
-
-~
-
-Thanks -- The authors}
-
 Previous work has demonstrated the utility of graph databases as a tool for collecting and analyzing ancestry in evolutionary computation runs. That work focused on sections of individual runs, whereas this poster illustrates the application of these ideas on the entirety of large runs (up to one million individuals) and combinations of multiple runs.
 
 Here we use these tools to generate graphs showing \emph{all} the ancestors of successful individuals from a variety of stack-based genetic programming runs on software synthesis problems. These graphs highlight important moments in the evolutionary process. They also allow us to compare the dynamics when using different evolutionary tools, such as different selection mechanisms or representations, as well as comparing the dynamics for successful and unsuccessful runs.
@@ -161,19 +147,19 @@ In this poster we illustrate the use of these tools as a means of exploring enti
 
 Here we illustrate these ideas by extracting and plotting the ancestors of final generation individuals in both a successful (Figure~\ref{fig:success}) and an unsuccessful run (Figure~\ref{fig:fail}) of the replace-space-with-newline software synthesis problem~\cite{Helmuth:2015:GECCO,Helmuth:2015:dissertation} using lexicase selection~\cite{Helmuth:2014:ieeeTEC}. The successful run shows all the ancestors of that run's winners (i.e., individuals with total error 0, discovered at generation 129). The unsuccessful run shows the ancestors of all individuals from generation 300, when the run was terminated.
 
-\begin{figure}[t]
-	\centering
-	\includegraphics[height=0.5 \textheight]{../Figures/output_success.pdf}
-	\caption{Ancestry tree for the one individual with total error 0 in a successful run of the replace-space-with-newline problem using lexicase selection.}
-	\label{fig:success}
-\end{figure}
-
-\begin{figure}[p]
-	\centering
-	\includegraphics[height=0.91\textheight]{../Figures/output_fail.pdf}
-	\caption{Ancestry tree for all of the individuals in the final generation for an unsuccessful run of the replace-space-with-newline problem using lexicase selection.}
-	\label{fig:fail}
-\end{figure}
+%\begin{figure}[t]
+%	\centering
+%	\includegraphics[height=0.5 \textheight]{../Figures/output_success.pdf}
+%	\caption{Ancestry tree for the one individual with total error 0 in a successful run of the replace-space-with-newline problem using lexicase selection.}
+%	\label{fig:success}
+%\end{figure}
+%
+%\begin{figure}[p]
+%	\centering
+%	\includegraphics[height=0.91\textheight]{../Figures/output_fail.pdf}
+%	\caption{Ancestry tree for all of the individuals in the final generation for an unsuccessful run of the replace-space-with-newline problem using lexicase selection.}
+%	\label{fig:fail}
+%\end{figure}
 
 In these figures generations run from the initial random population at the top to the final generation at the bottom, one generation per row. Both of these runs used a population size of 1,000, but far fewer individuals are included in the graphs because only a (sometimes small) subset of the individuals in any given generation go on to be ancestors of individuals in subsequent generations. Each individual is represented as a rectangle whose width is proportional to the number of parent selections that individual received, and whose height is proportional to the number of its offspring that are included in the ancestry graph. 
 % The ratio of width to number of selections is $\sfrac{1}{5}$ the ratio of height to number of ancestral children to keep the graph from getting too wide.
@@ -203,13 +189,80 @@ cut down on the number of visualized nodes. This typically reduces the number of
 generation (row of the graph) from the original 1,000 to 300 or less, and sometimes down
 to a few dozen.
 
-\begin{figure*}[tb]
+\begin{figure*}
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{../Figures/lex_run0_RBM_color_filtered_and_full_30000.pdf}
+		\includegraphics[width=0.9\textwidth]{../Figures/run0_RBM_color_filtered_and_full_30000.pdf}
 	\end{center}
 	\caption{Unfiltered (left) and filtered (right) versions of a successful lexicase run, both with the same color map.}
 	\label{fig:lexRun0FilteredAndFull}
 \end{figure*}
+
+\begin{figure*}[tb]
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{../Figures/run1_RBM_color_filtered_and_full_60000.pdf}
+	\end{center}
+	\caption{Unfiltered (left) and filtered (right) versions of a successful lexicase run, both with the same color map.}
+	\label{fig:lexRun1FilteredAndFull}
+\end{figure*}
+
+\begin{figure*}[tb]
+	\begin{center}
+		\includegraphics[width=0.7\textwidth]{../Figures/run5_RBM_color_filtered_and_full.pdf}
+	\end{center}
+	\caption{Unfiltered (left) and filtered (right) versions of a successful lexicase run, both with the same color map.}
+	\label{fig:lexRun5FilteredAndFull}
+\end{figure*}
+
+\section{Comparing runs}
+\label{sec:comparisons}
+
+\begin{figure*}[tb]
+	\begin{center}
+		\includegraphics[height=0.95\textheight]{../Figures/runs_1_0_90_filtered.pdf}
+	\end{center}
+	\caption{Filtered ancestry graphs of three successful runs (1, 0, and 90), all with the same color map.}
+	\label{fig:runs1:0:90:filtered}
+\end{figure*}
+
+\begin{figure*}[tb]
+	\begin{center}
+		\includegraphics[height=0.95\textheight]{../Figures/runs_1_99_6_RBM_color_filtered.pdf}
+	\end{center}
+	\caption{Filtered ancestry graphs of three successful runs (1, 99, and 6), all with the same color map.}
+	\label{fig:runs1:99:6:filtered}
+\end{figure*}
+
+\begin{figure*}[tb]
+	\begin{center}
+		\includegraphics[width=0.7\textwidth]{../Figures/runs_5_1_99_6_0_90_RBM_color_filtered.pdf}
+	\end{center}
+	\caption{Filtered ancestry graphs of six successful runs (5, 1, 99, 6, 0, and 90), all with the same color map.}
+	\label{fig:runs5:1:99:6:0:90:filtered}
+\end{figure*}
+
+\begin{figure*}[tb]
+	\begin{center}
+		\includegraphics[width=0.6\textwidth]{../Figures/runs_5_1_99_6_RBM_color_filtered.pdf}
+	\end{center}
+	\caption{Filtered ancestry graphs of 4 successful runs (5, 1, 99, and 6), all with the same color map.}
+	\label{fig:runs5:1:99:6:filtered}
+\end{figure*}
+
+\begin{figure*}[tb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{../Figures/runs_92_2_dual_color_full_no_last_gen.pdf}
+	\end{center}
+	\caption{Full ancestry graphs of 2 failed runs (92 and 2), all with the same color map.}
+	\label{fig:runs92:2:filtered}
+\end{figure*}
+
+%\begin{figure*}[tb]
+%	\begin{center}
+%		\includegraphics[width=0.5\textwidth]{../Figures/runs_92_2_1_99_dual_color_full.pdf}
+%	\end{center}
+%	\caption{Full ancestry graphs of 4 different runs (92, 2, 1, and 99), all with the same color map.}
+%	\label{fig:runs92:2:1:99:filtered}
+%\end{figure*}
 
 \section{Future work}
 \label{sec:futurework}
