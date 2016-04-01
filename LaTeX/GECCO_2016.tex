@@ -77,6 +77,13 @@
 %	\email{casal033@morris.umn.edu}
 %\and
 %\alignauthor
+%Mitchell Finzel \\
+%	\affaddr{Div. of Science and Math}\\
+%	\affaddr{Univ. of Minnesota, Morris}\\
+%	\affaddr{Morris, MN USA-56267}\\
+%	\email{finze008@morris.umn.edu}
+%\and
+%\alignauthor
 %Thomas Helmuth\\
 %	\affaddr{Computer Science Dep't}\\
 %	\affaddr{Washington and Lee Univ.}\\
@@ -94,23 +101,6 @@
 
 \begin{abstract}
 
-\todo[inline]{We are submitting this in the hopes of it being a \textbf{poster} and not a paper. There's just not a separate mechanism for submitting specifically for posters.
-
-~
-
-We've tried to keep this close to 2 pages, which is the limit we'll have if this is in fact accepted as a poster. As a result, this submission only includes two of our smaller ancestry graphs. Our intent is for the the poster to include at least one much larger graph, showing the complete ancestry of the winners for a run with nearly 1,000 generations, along with several other comparisons, such as the dynamics of lexicase vs. tournament selection.
-
-~
-
-The graphs we have included are PDF vector graphics and support very high levels of zooming if your PDF viewer allows it.
-
-~
-
-Thanks -- The authors}
-
-Previous work has demonstrated the utility of graph databases as a tool for collecting and analyzing ancestry in evolutionary computation runs. That work focused on sections of individual runs, whereas this poster illustrates the application of these ideas on the entirety of large runs (up to one million individuals) and combinations of multiple runs.
-
-Here we use these tools to generate graphs showing \emph{all} the ancestors of successful individuals from a variety of stack-based genetic programming runs on software synthesis problems. These graphs highlight important moments in the evolutionary process. They also allow us to compare the dynamics when using different evolutionary tools, such as different selection mechanisms or representations, as well as comparing the dynamics for successful and unsuccessful runs.
 
 \end{abstract}
 
@@ -155,34 +145,27 @@ Reporting results of genetic programming (GP) and evolutionary computation is fr
 
 In this poster we illustrate the use of these tools as a means of exploring entire ancestry trees. We use the Titan graph database\footnote{\url{http://thinkaurelius.github.io/titan/}} along with the Gremlin shell and the Tinkerpop query tools\footnote{\url{https://tinkerpop.incubator.apache.org/}} to store the parent-child relationships from genetic programming runs, and to extract the ancestry trees of specified individuals. We then visualize these subgraphs using the Graphviz \texttt{dot} graph layout tool\footnote{\url{http://www.graphviz.org/}}.
 
+% In this section we'll look at a successful run in RBM coloring. This run will 
+% be shown in its full ancestry and a filtered version with the same colors of 
+% the full run. This way we can compare these indviduals in the filtered version
+% to that of the full one.
+\section{Example: Comparing a Successful Run in Filtered \& Full}
+
+% In the section we'll look at least one successful and failed run in dual
+% coloring. This will allow us to see how individuals are prgressing (or not)
+% over time. Having these ancestries in full will allow us to generally comapre
+% the generation sizes and get the visual impact of a failed run.
 \section{Example: Success vs. failure}
-\label{sec:examples}
+\label{sec:SuccessVsFail}
 
-Here we illustrate these ideas by extracting and plotting the ancestors of final generation individuals in both a successful (Figure~\ref{fig:success}) and an unsuccessful run (Figure~\ref{fig:fail}) of the replace-space-with-newline software synthesis problem~\cite{Helmuth:2015:GECCO,Helmuth:2015:dissertation} using lexicase selection~\cite{Helmuth:2014:ieeeTEC}. The successful run shows all the ancestors of that run's winners (i.e., individuals with total error 0, discovered at generation 129). The unsuccessful run shows the ancestors of all individuals from generation 300, when the run was terminated.
 
-\begin{figure}[t]
-	\centering
-	\includegraphics[height=0.5 \textheight]{../Figures/output_success.pdf}
-	\caption{Ancestry tree for the one individual with total error 0 in a successful run of the replace-space-with-newline problem using lexicase selection.}
-	\label{fig:success}
-\end{figure}
+% In this section we'll look at multiple successful runs in their filtered
+% versions. We'll create a RBM color scheme which incorporates all error vectors
+% in the filtered ancestries. This will allow us to see similar individual in 
+% other runs. Ex) You may see red at the top of one run, and at the end of another. Which could imply that oine found a solution earlier.
+\section{Example: Comparing Filtered Successful Runs}
 
-\begin{figure}[p]
-	\centering
-	\includegraphics[height=0.91\textheight]{../Figures/output_fail.pdf}
-	\caption{Ancestry tree for all of the individuals in the final generation for an unsuccessful run of the replace-space-with-newline problem using lexicase selection.}
-	\label{fig:fail}
-\end{figure}
 
-In these figures generations run from the initial random population at the top to the final generation at the bottom, one generation per row. Both of these runs used a population size of 1,000, but far fewer individuals are included in the graphs because only a (sometimes small) subset of the individuals in any given generation go on to be ancestors of individuals in subsequent generations. Each individual is represented as a rectangle whose width is proportional to the number of parent selections that individual received, and whose height is proportional to the number of its offspring that are included in the ancestry graph. 
-% The ratio of width to number of selections is $\sfrac{1}{5}$ the ratio of height to number of ancestral children to keep the graph from getting too wide.
-The color of an individual is determined by its total error; 0 total error is bright green, moving through blues to bright red, which represents total error of 10,000 or greater. A directed edge in the graph indicates a parent-child relation, with the edge going from the parent down to the child. A child with only a single incoming edge is the result of a mutation operator and children with two incoming edges are the result of a recombination; see~\cite{Helmuth:2015:dissertation,Spector:2013:GPTP} for additional details.
-
-Both Figures~\ref{fig:success} and~\ref{fig:fail} illustrate a common pattern in the early generations where there a substantial number of highly selected individuals (i.e., very wide rectangles). This is presumably because most individuals in the early generations perform poorly, as evidenced by the prevalence of red and pink, leaving a handful of slightly-less-bad individuals to receive the bulk of the selections. After several generations, however, the population gains competence (as evidenced by more purple and dark blue) and there are fewer instances where a single individual receives a very high proportion of the selection events, as evidenced by the large number of small rectangles.
-
-After that initial phase, the behavior in the unsuccessful run (Figure~\ref{fig:fail}) becomes static, with the width of the graph (essentially the number of parents in each generation) remaining roughly constant, with no highly selected (i.e., wide) individuals. The colors also indicate that the total error is not improving substantially over time, remaining mostly between pink and purple. The best total error in fact remains at 234 from generation 16 to 270, although there is a gradual improvement in the last 30 generations with the best error at the end of the run being 215.
-
-In the successful run (Figure~\ref{fig:success}), however, there are clear changes in the dynamics over time. By generation 14, the best individual is able to correctly solve 124 of the 200 test cases for replace-space-with-newline. Then starting around generation 59 there is a ``narrowing'' of the graph, with several highly selected (i.e., wide) individuals dominating the ancestry for the next ten generations. This narrowing represents an important ``discovery'' which leads to individuals that have zero error on an additional 9\% (18) of the test cases. The graph widens out again after that until the rapid convergence on the solution in the final generations. The graph also highlights three highly selected individuals in generation 87 where for the first time the best individual has zero error on an additional 18 test cases.
 
 \bibliographystyle{abbrv}
 \bibliography{GECCO_2016}
