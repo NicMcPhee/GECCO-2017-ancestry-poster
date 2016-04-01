@@ -101,6 +101,9 @@
 
 \begin{abstract}
 
+Previous work has demonstrated the utility of graph databases as a tool for collecting and analyzing ancestry in evolutionary computation runs. That work focused on sections of individual runs, whereas this poster illustrates the application of these ideas on the entirety of large runs (up to one million individuals) and combinations of multiple runs.
+
+Here we use these tools to generate graphs showing \emph{all} the ancestors of successful individuals from a variety of stack-based genetic programming runs on software synthesis problems. These graphs highlight important moments in the evolutionary process. They also allow us to compare the dynamics when using different evolutionary tools, such as different selection mechanisms or representations, as well as comparing the dynamics for successful and unsuccessful runs.
 
 \end{abstract}
 
@@ -113,6 +116,7 @@
 	</concept>
 	<concept>
 	<concept_id>10003120.10003145.10003147.10010364</concept_id>
+
 	<concept_desc>Human-centered computing~Scientific visualization</concept_desc>
 	<concept_significance>500</concept_significance>
 	</concept>
@@ -145,26 +149,103 @@ Reporting results of genetic programming (GP) and evolutionary computation is fr
 
 In this poster we illustrate the use of these tools as a means of exploring entire ancestry trees. We use the Titan graph database\footnote{\url{http://thinkaurelius.github.io/titan/}} along with the Gremlin shell and the Tinkerpop query tools\footnote{\url{https://tinkerpop.incubator.apache.org/}} to store the parent-child relationships from genetic programming runs, and to extract the ancestry trees of specified individuals. We then visualize these subgraphs using the Graphviz \texttt{dot} graph layout tool\footnote{\url{http://www.graphviz.org/}}.
 
-% In this section we'll look at a successful run in RBM coloring. This run will 
-% be shown in its full ancestry and a filtered version with the same colors of 
-% the full run. This way we can compare these indviduals in the filtered version
-% to that of the full one.
-\section{Example: Comparing a Successful Run in Filtered \& Full}
+\section{Replace-Space-With-Newline}
+\label{sec:RSWN}
+\todo[inline]{-Nic}
 
-% In the section we'll look at least one successful and failed run in dual
-% coloring. This will allow us to see how individuals are prgressing (or not)
-% over time. Having these ancestries in full will allow us to generally comapre
-% the generation sizes and get the visual impact of a failed run.
-\section{Example: Success vs. failure}
-\label{sec:SuccessVsFail}
+\section{Basic Structure}
+\label{sec:basics}
 
+\todo[inline]{Run0 with no coloring of nodes, and plain edges -Maggie}
+
+\section{Edges}
+\todo[inline]{-Maggie}
+
+\section{Nodes}
+\todo[inline]{Box Sizing -Maggie}
+\todo[inline]{RBM Color -Nic}
+\todo[inline]{Dual Color -Maggie}
+
+\begin{figure*}
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{../Figures/run0_RBM_color_filtered_and_full_30000.pdf}
+	\end{center}
+	\caption{Unfiltered (left) and filtered (right) versions of a successful lexicase run, both with the same color map.}
+	\label{fig:lexRun0FilteredAndFull}
+\end{figure*}
+
+\section{Filtering}
+\label{sec:filtering}
+
+While the large graphs of full runs can provide an excellent ``big picture'' 
+view of the run dynamics, there is \emph{so} much information that it can be
+difficult to isolate specific features. We can, however, extract and visualize
+subgraphs that focus on specific areas or events in the runs.
+
+One simple example of this sort of filtering that we've already introduced is
+looking only at individuals that are in fact ancestors of individuals in the
+final generation. Most individuals in evolutionary systems aren't ultimately
+ancestors of individuals in the final population; they're evolutionary ``dead ends'',
+either because they have no children, or their descendants eventually fail to have
+children. All the graphs provided so far have used this filtering to substantially
+cut down on the number of visualized nodes. This typically reduces the number of nodes in a
+generation (row of the graph) from the original 1,000 to 300 or less, and sometimes down
+to a few dozen.
+
+\begin{figure*}[tb]
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{../Figures/run1_RBM_color_filtered_and_full_60000.pdf}
+	\end{center}
+	\caption{Unfiltered (left) and filtered (right) versions of a successful lexicase run, both with the same color map.}
+	\label{fig:lexRun1FilteredAndFull}
+\end{figure*}
+
+
+\section{Comparing runs}
+\label{sec:comparisons}
 
 % In this section we'll look at multiple successful runs in their filtered
 % versions. We'll create a RBM color scheme which incorporates all error vectors
 % in the filtered ancestries. This will allow us to see similar individual in 
 % other runs. Ex) You may see red at the top of one run, and at the end of another. Which could imply that oine found a solution earlier.
-\section{Example: Comparing Filtered Successful Runs}
+\subsection{Successful Runs}
+\begin{figure*}[tb]
+	\begin{center}
+		\includegraphics[height=0.95\textheight]{../Figures/runs_1_99_6_RBM_color_filtered2_with_space.pdf}
+	\end{center}
+	\caption{Filtered ancestry graphs of three successful runs (1, 99, and 6), all with the same color map.}
+	\label{fig:runs1:99:6:filtered}
+\end{figure*}
 
+% In the section we'll look at least one successful and failed run in dual
+% coloring. This will allow us to see how individuals are prgressing (or not)
+% over time. Having these ancestries in full will allow us to generally comapre
+% the generation sizes and get the visual impact of a failed run.
+
+\subsection{Successful vs. Failed Runs}
+%\begin{figure*}[tb]
+%	\begin{center}
+%		\includegraphics[width=0.5\textwidth]{../Figures/runs_92_2_dual_color_full_no_last_gen.pdf}
+%	\end{center}
+%	\caption{Full ancestry graphs of 2 failed runs (92 and 2), all with the same color map.}
+%	\label{fig:runs92:2:filtered}
+%\end{figure*}
+
+%\begin{figure*}[tb]
+%	\begin{center}
+%		\includegraphics[width=0.5\textwidth]{../Figures/runs_92_2_1_99_dual_color_full_small.pdf}
+%	\end{center}
+%	\caption{Full ancestry graphs of 4 different runs (92, 2, 1, and 99), all with the same color map.}
+%	\label{fig:runs92:2:1:99:filtered}
+%\end{figure*}
+
+\section{Future work}
+\label{sec:futurework}
+\todo[inline]{Autoconstruction, Dynamic views would be nice. Using google maps to visualize large graphs. Gephi. Centrality metrics. -Nic}
+
+
+
+\todo[inline]{Look at previous VizGEC work. - Nic}
 
 
 \bibliographystyle{abbrv}
