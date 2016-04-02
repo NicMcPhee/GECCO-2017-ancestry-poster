@@ -150,13 +150,13 @@ We probably want to expand it now and improve the motivation.}
 
 Reporting results of genetic programming (GP) and evolutionary computation is frequently limited to aggregate statistics such as mean best fitness or percentage of successful runs. Unfortunately this fails to convey the complex dynamics of such evolutionary systems and obscures or omits potentially valuable information about \emph{why} the runs behaved as they did. Previous work~\cite{McPhee:2015:GPTP} has demonstrated the utility of graph databases as tools for collecting and analyzing ancestry in GP runs, but was focused on sections of individual runs.
 
-In this poster we illustrate the use of these tools as a means of exploring entire ancestry trees. We use the Titan graph database\footnote{\url{http://thinkaurelius.github.io/titan/}} along with the Gremlin shell and the Tinkerpop query tools\footnote{\url{https://tinkerpop.incubator.apache.org/}} to store the parent-child relationships from genetic programming runs, and to extract the ancestry trees of specified individuals. We then visualize these subgraphs using the Graphviz \texttt{dot} graph layout tool\footnote{\url{http://www.graphviz.org/}}.
+In this poster we illustrate the use of these tools as a means of exploring entire ancestry trees. We use the Titan graph database\footnote{\url{http://thinkaurelius.github.io/titan/}} along with the Gremlin shell and the Tinkerpop query tools\footnote{\url{https://tinkerpop.apache.org/}} to store the parent-child relationships from genetic programming runs, and to extract the ancestry trees of specified individuals. We then visualize these subgraphs using the Graphviz \texttt{dot} graph layout tool\footnote{\url{http://www.graphviz.org/}}.
 
-\section{Our test environment: PushGP \& Replace-Space-With-Newline}
-\label{sec:RSWN}
+\section{Our test environment: PushGP \& Replace Space With Newline}
+\label{sec:testEnv}
 
 All the visualizations presented here are on runs using the Clojush
-implementation\footnote{https://github.com/lspector/Clojush} of the 
+implementation\footnote{\url{https://github.com/lspector/Clojush}} of the 
 PushGP genetic programming (GP) system~\cite{spector:2002:GPEM, 1068292}, 
 but all the ideas here
 could easily apply to almost any evolutionary computation system. The use
@@ -186,8 +186,8 @@ below.
 We have applied the visualizations described here on a 
 number of different problems taken from a suite of software synthesis benchmark 
 problems~\cite{Helmuth:2015:GECCO}, but in the interest of space we
-will focus here on a single test problem: replace-space-with-newline.
-In replace-space-with-newline the goal is to evolve a program that takes a string
+will focus here on a single test problem: Replace Space With Newline.
+In Replace Space With Newline the goal is to evolve a program that takes a string
 as input and has two tasks: (a) it should print the input string, with all spaces
 replaced by newlines, and (b) it should return an integer that is the number of
 characters in the input string that were \emph{not} replaced. The use of
@@ -234,11 +234,47 @@ The width of a node is based on the individual's number of selections. This is t
 
 The height of a node is based on the individual's number of ancestry children. Similar to the opacity of an edge, a node is taller if it has many children in this ancestry tree. 
 
-\todo[inline]{RBM Color -Nic}
+In the following graphs, we illustrate the use of two different coloring 
+schemes for nodes, each of which conveys information about the errors 
+(and thus the fitness) of the individuals represented by nodes. 
+The first, \emph{dual coloring}, uses color to represent success on the 
+two distinct types of errors (see Section~\ref{sec:testEnv}). The second,
+\emph{RBM coloring}, uses restricted Boltzmann machines (RBMs) to compress
+the 200 error values into three RGB color values.
 
-The problem at hand of `Replace-Space-With-Newline' is special in the sense that there's two halves of the problem, printing and returning. The test cases that track these aspects are also split into two sets of one-hundred cases. We take advantage of this by separating the two sets of cases and assigning a color to each half, we call this ``Dual Coloring''. 
+The \emph{dual coloring} approach uses hue-saturation-lightness (HSL) coloring
+based on the ``success'' of a given individual. 
+The Replace Space With Newline problem is special in the sense that there are 
+two halves of the problem, printing and returning. The test cases that track 
+these aspects are also split into two sets of one-hundred cases. We take 
+advantage of this by separating the two sets of cases and assigning a color 
+to each half, with the color of the left side of a node based on the
+printing errors, and the color on the right side based on the return errors.
+For a test case to be passing, there needs to be an error of zero. 
+The hue of one half of a node is based on the percent of zeros, i.e., 
+successful cases, for that half. The hue 
+ranges from red (the worst, with no zeros) to yellow (the best, with all zeros). 
+This coloring tells us how many test cases an individual solves, but gives no 
+information on how far off it is on the other test cases, so we incorporated 
+lightness into the coloring as well. The lightness of one side of a node is 
+based on the individual's total error on that half of the test cases, with 
+higher total errors receiving darker shading.
 
-For a test case to be passing, there needs to be no error or an error of zero. Because there are one-hundred cases for each set and an error of zero is good, the hue of a node is based on the percent of zeros for each half. The hue ranges from red (the worst, with no zeros) to yellow (the best, with all zeros). This coloring tells us how good an individual is doing, but not how poorly; so we incorporated shading into the coloring as well. Shading of a node is based on a half's total error percentage. In creating these diagrams, we track the highest total error in an ancestry tree. For each half set of cases, we sum the errors and compute the difference from the highest total error to determine the shading. The higher the sum of errors, the darker the shading is. 
+One potential concern with the dual coloring approach is that we are simply 
+counting successful test cases to determine the hue, and using the total
+error for the lightness. Both of these are aggregate measures that can obscure
+valuable details such as \emph{which} test cases are being solved. Because
+lexicase selection bases selection on entire error vectors (instead of, for example,
+just using total error), which test cases are being solved becomes much more
+important than just how many, or what the total error is. To address this, we
+generated a second coloring that used a simple 
+implementation\footnote{\url{https://github.com/echen/restricted-boltzmann-machines}} 
+of restricted Boltzmann machines (RBMs) as a dimensionality reduction 
+tool~\cite{hinton2006reducing}. Here we trained RBM autoencoders to map 200-bit
+vectors to 24-bit vectors, where the inputs were binary versions of the error
+vectors where every non-zero value was converted to 1, and the outputs were
+interpreted as 24-bit RGB colors. This allowed us to see valuable relationships
+between individuals that were successful on similar sets of test cases.
 
 \begin{figure*}
 	\begin{center}
@@ -318,6 +354,16 @@ to a few dozen.
 \todo[inline]{Autoconstruction, Dynamic views would be nice. Using google maps to visualize large graphs. Gephi. Centrality metrics. -Nic}
 
 Lexicase vs. tournament!
+
+In our RBM coloring we converted all our error vectors to binary vectors by
+converting all non-zero values to 1. This obviously eliminates much potentially
+valuable information. There are situations, for example, where an individual has
+an error of 1 on a large group of test cases; such an individual is assigned
+the same RBM color as an individual with an error of 1,000 on all those cases,
+despite the fact that it's \emph{much} closer to the desired answer.
+It would then be worth exploring alternatives that include
+more, or perhaps, all the information in the error vector when generating the
+colorings.
 
 \todo[inline]{Look at previous VizGEC work. - Nic}
 
