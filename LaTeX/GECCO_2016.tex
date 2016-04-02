@@ -61,7 +61,7 @@
 
 \title{Visualizing genetic programming ancestries using graph databases}
 
-%\numberofauthors{4}
+%\numberofauthors{5}
 %\author{
 %\alignauthor
 %Nicholas Freitag McPhee\\
@@ -158,7 +158,7 @@ In this poster we illustrate the use of these tools as a means of exploring enti
 All the visualizations presented here are on runs using the Clojush
 implementation\footnote{https://github.com/lspector/Clojush} of the 
 PushGP genetic programming (GP) system~\cite{spector:2002:GPEM, 1068292}, 
-but all the ideas here
+but all of the ideas here
 could easily apply to almost any evolutionary computation system. The use
 of graph databases to capture ancestor lineage is a completely general
 concept, for example, and could be applied to any system that implements a
@@ -197,9 +197,9 @@ settings used in these runs are as described in~\cite{Helmuth:2015:GECCO}.
 
 \section{Basic Structure}
 \label{sec:basics}
-These evolutionary computation runs are shown in the form of their ancestral trees. For a successful run, where at least one individual has found a solution to the problem, we get the ancestral tree by finding all individuals who have found a solution in the last generation. With these individuals, we go back through generations to grab their parents, grandparents, etc. until we have every ancestor of these individuals, up until the beginning generation. In an unsuccessful run, where no individual has found a solution to the problem, we get all of the individuals in the last generation (limited to 300 generations) and grab their ancestors to make the ancestral tree. 
+These evolutionary computation runs are shown in the form of their ancestry trees. For a successful run, where at least one individual has found a solution to the problem, we get the ancestry tree by finding all individuals who have found a solution in the final generation. With these individuals, we go back through generations to retrieve their parents, grandparents, etc. until we have every ancestor of these individuals, from start to finish. In an unsuccessful run, where no individual has found a solution to the problem, we take all of the individuals in the last generation (limited to 300 generations) and create a tree out of their ancestors.
 
-Each ancestry tree diagram is composed of nodes and edges, where the nodes represent individuals and the edges represent their parent-child relationship. An example of this basic structure is in Figure \ref{fig:lexRun0Basic}. From this basic structure, we modify aspects of the edges and nodes such as color and size to show more information about individuals or relationships in each run.
+Each ancestry tree diagram is composed of nodes and edges, where the nodes represent individuals and the edges represent their parent-child relationships. An example of this basic structure is in Figure \ref{fig:lexRun0Basic}. Improving upon this basic structure, we modify aspects of the edges and nodes such as color and size to show more information about individuals or relationships in each run.
 
 \begin{figure*}
 	\begin{center}
@@ -212,7 +212,7 @@ Each ancestry tree diagram is composed of nodes and edges, where the nodes repre
 \section{Edges}
 \label{sec:edges}
 
-As stated previously, edges show the parent-child relationship in our ancestry diagrams. We've modified aspects of the edges such as color, style, width, and transparency to tell us more information about these runs. The color and style of an edge is based on what operator was used to create a child made. Here is the list of relations as \textbf{Style \& Color: Operator}.
+As stated previously, edges show the parent-child relationship in our ancestry diagrams. We've modified aspects of the edges such as color, style, width, and transparency to tell us more information about these runs. The color and style of an edge is based on what operator was used to create a child. Here is the list of relations as \textbf{Style \& Color: Operator}.
 \begin{itemize}
 \setlength\itemsep{0em}
 \item Solid \& Black: Alternation, followed by Uniform Mutation
@@ -221,24 +221,24 @@ As stated previously, edges show the parent-child relationship in our ancestry d
 \item Dashed \& Orange: Uniform Closed Mutation
 \end{itemize}
 
-The width of an edge is determined by the Damerau--Levenshtein distance between a parent's and child's genome~\cite{wiki:DLdist}. We use this as a measure to determine how similar a child is to its parent. The smaller the Damerau--Levenshtein distance, the more similar their genomes are. With edges, if a child is very similar its parent, the edge will be very wide. In converse, if a child is very different from its parent, the edge will be very slim.
+The width of an edge is determined by the Damerau--Levenshtein distance between a parent's and child's genome~\cite{wiki:DLdist}. We use this as a measure to determine how similar a child is to its parent. The smaller the Damerau--Levenshtein distance, the more similar their genomes are. With edges, if a child is similar to its parent, the edge will be wider. In converse, the more dissimilar a child is from its parent, the thinner the edge will be.
 
-The last aspect of edges is their transparency. We based this on the number of ancestry children an individual had. Meaning, an incoming edge is more opaque if the individual had many children in the current ancestry tree. This helps us find the parents of popular individuals since these edges are not as transparent as others.
+The last aspect of edges is their transparency. We based this on the number of ancestry children an individual had. Meaning, an incoming edge is more opaque if the individual had many children in the current ancestry tree. This helps us find the parents of popular individuals since these edges are more opaque than  others.
 
 \section{Nodes}
 \label{sec:nodes}
 
-Just as we adjust aspects of the edges in our diagrams to tell us more information about the runs, we adjust aspects of the nodes as well. These aspects include the width, height, and the color of the node. Our nodes are rectangle shaped for clarity and organization. 
+Just as we adjust aspects of the edges in our diagrams to tell us more information about the runs, we adjust aspects of the nodes as well. Building off of a rectangular shape that we use for clarity and organization, we alter the width, height, and the color of the node.
 
-The width of a node is based on the individual's number of selections. This is the number of times an individual was selected to have a child in the overall run, not just in the ancestry tree. One thing to note about this is that an individual can be both parents of a child, so in this scenario it would have two selections. A node that is very wide will have a overall high number of selections. This tells us that this individual was selected often or was ``hyperselected''~\cite{Helmuth:2016:GECCO}, so it could be interesting to know more about it. 
+The width of a node is based on the individual's number of selections. This is the number of times an individual was selected to have a child in the overall run, not just in the ancestry tree. One thing to note about this is that an individual can be both parents of a child, in this scenario it would be counted as two selections. A node that is very wide will have an overall high number of selections. This tells us that this individual was selected often or was ``hyperselected''~\cite{Helmuth:2016:GECCO}, which may be a point of interest for further investigations. 
 
-The height of a node is based on the individual's number of ancestry children. Similar to the opacity of an edge, a node is taller if it has many children in this ancestry tree. 
+The height of a node is based on the individual's number of ancestry children. Similar to the opacity of an edge, the more children a node has in this ancestry tree, the taller the node.
 
 \todo[inline]{RBM Color -Nic}
 
 The problem at hand of `Replace-Space-With-Newline' is special in the sense that there's two halves of the problem, printing and returning. The test cases that track these aspects are also split into two sets of one-hundred cases. We take advantage of this by separating the two sets of cases and assigning a color to each half, we call this ``Dual Coloring''. 
 
-For a test case to be passing, there needs to be no error or an error of zero. Because there are one-hundred cases for each set and an error of zero is good, the hue of a node is based on the percent of zeros for each half. The hue ranges from red (the worst, with no zeros) to yellow (the best, with all zeros). This coloring tells us how good an individual is doing, but not how poorly; so we incorporated shading into the coloring as well. Shading of a node is based on a half's total error percentage. In creating these diagrams, we track the highest total error in an ancestry tree. For each half set of cases, we sum the errors and compute the difference from the highest total error to determine the shading. The higher the sum of errors, the darker the shading is. 
+For a test case to be passing, there needs to be no error or an error of zero. Because there are one-hundred cases for each set and an error of zero is good, the hue of a node is based on the percent of zeros for each half. The hue ranges from red (the worst, with no zeros) to yellow (the best, with all zeros). This coloring tells us how well an individual is doing, but not how poorly; so we incorporated shading into the coloring as well. Shading of a node is based on a half's total error percentage. In creating these diagrams, we track the highest total error in an ancestry tree. For each half set of cases, we sum the errors and compute the difference from the highest total error to determine the shading. The higher the sum of errors, the darker the shading is. 
 
 \begin{figure*}
 	\begin{center}
