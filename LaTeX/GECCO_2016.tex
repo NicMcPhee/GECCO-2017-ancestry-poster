@@ -163,12 +163,47 @@ understand the key dynamics.
 \section{Introduction}
 \label{sec:introduction}
 
-\todo[inline]{This is quite short/thin because it's what we had on the poster paper.
-We probably want to expand it now and improve the motivation.}
+Our reporting of results in genetic programming (GP) and evolutionary computation 
+is frequently limited to aggregate statistics such as mean best fitness or 
+percentage of successful runs. Unfortunately this fails to convey the complex 
+dynamics of such evolutionary systems and obscures or omits potentially valuable 
+information about \emph{why} the runs behaved as they did. While it's clearly
+valuable to know that Approach A is ``better'' in some sense (e.g., more successes)
+that Approach B, it is also valuable to understand \emph{why} it succeeds more 
+often, a question summary statistics rarely shed any light on.
 
-Reporting results of genetic programming (GP) and evolutionary computation is frequently limited to aggregate statistics such as mean best fitness or percentage of successful runs. Unfortunately this fails to convey the complex dynamics of such evolutionary systems and obscures or omits potentially valuable information about \emph{why} the runs behaved as they did. Previous work~\cite{McPhee:2015:GPTP} has demonstrated the utility of graph databases as tools for collecting and analyzing ancestry in GP runs, but was focused on sections of individual runs.
+One way to move past the limitations of summary statistics is to collect ancestry
+information on runs, recording and analyzing parent--child 
+relationships~\cite{hart2001gavel,burlacu2013visualization,vaseux2013event,cruz2015elicit}. \
+Most previous ancestry
+work has been limited to fairly small datasets, however, in part because of the
+challenges of storing and working effectively with the hundreds of thousands of
+ancestry relationships present in most evolutionary computation runs.
 
-In this poster we illustrate the use of these tools as a means of exploring entire ancestry trees. We use the Titan graph database\footnote{\url{http://thinkaurelius.github.io/titan/}} along with the Gremlin shell and the Tinkerpop query tools\footnote{\url{https://tinkerpop.apache.org/}} to store the parent-child relationships from genetic programming runs, and to extract the ancestry trees of specified individuals. We then visualize these subgraphs using the Graphviz \texttt{dot} graph layout tool\footnote{\url{http://www.graphviz.org/}}.
+Previous work~\cite{McPhee:2015:GPTP} has demonstrated the utility of graph databases as 
+tools for collecting and analyzing large collections of ancestry data from GP runs,
+helping to identify key moments in runs, and general behavioral trends. That work,
+however, was focused on sections of individual runs. In this paper we illustrate the 
+use of these tools as a means of visualizing and exploring entire 
+ancestry trees, and combinations of ancestry trees. 
+We use the Titan graph database\footnote{\url{http://
+thinkaurelius.github.io/titan/}} along with the Gremlin shell and the Tinkerpop query 
+tools\footnote{\url{https://tinkerpop.apache.org/}} to store the parent-child 
+relationships from genetic programming runs, and to extract the ancestry trees of 
+specified individuals. We then visualize these subgraphs using the Graphviz \texttt{dot} 
+graph layout tool.\footnote{\url{http://www.graphviz.org/}}
+
+In the next section (Section~\ref{sec:testEnv}) we will describe the test
+environment used to generate the data used in this paper. Section~\ref{sec:basics}
+describes the basic graph structure used in these visualizations, including
+detailed descriptions of how the rendering of edges and nodes conveys additional
+information about the individuals and run dynamics. The initial graphs are large
+enough to be rather overwhelming, so in Section~\ref{sec:filtering} we describe
+ways to filter these large graphs into more comprehensible subgraphs. 
+Section~\ref{sec:comparisons} provides examples of our ability to compare multiple
+runs side-by-side, illustrating similarities and differences in the run dynamics.
+We wrap up with some ideas for future work in Section~\ref{sec:futurework} and
+conclusions in Section~\ref{sec:conclusions}.
 
 \section{Our test environment: PushGP \& Replace Space With Newline}
 \label{sec:testEnv}
@@ -213,7 +248,7 @@ these two distinct types of error values will be used in some of the visualizati
 as described in Section~\ref{sec:nodes}. The details of the system and
 settings used in these runs are as described in~\cite{Helmuth:2015:GECCO}.
 
-\section{Basic Structure}
+\section{Basic Graph Structure}
 \label{sec:basics}
 These genetic programming runs are shown in the form of their ancestral trees. For a successful run, where at least one individual has found a solution to the problem, we get the ancestral tree by finding all individuals who have reached a solution in the last generation. With these individuals, we go back through previous generations to grab their parents, grandparents, etc. until we have every ancestor of these individuals, up until the beginning generation. In an unsuccessful run, where no individual has found a solution to the problem, we get all of the individuals in the last generation (limited to 300 generations) and grab their ancestors to make the ancestral tree. 
 
@@ -227,7 +262,7 @@ Each ancestry tree diagram is composed of nodes and edges, where the nodes repre
 	\label{fig:lexRun0Basic}
 \end{figure*}
 
-\section{Edges}
+\subsection{Edges}
 \label{sec:edges}
 
 As stated previously, edges show the parent-child relationship in our ancestry diagrams. We've modified aspects of the edges such as color, style, width, and transparency to tell us more information about these runs. The color and style of an edge is based on what operator was used to create a child made. Here is the list of relations as \textbf{Style \& Color: Operator}.
@@ -243,7 +278,7 @@ The width of an edge is determined by the Damerau--Levenshtein distance between 
 
 The last aspect of edges is their transparency. We based this on the number of ancestry children an individual had. Meaning, an incoming edge is more opaque if the individual had many children in the current ancestry tree. This helps us find the parents of popular individuals since these edges are not as transparent as others.
 
-\section{Nodes}
+\subsection{Nodes}
 \label{sec:nodes}
 
 Just as we adjust aspects of the edges in our diagrams to tell us more information about the runs, we adjust aspects of the nodes as well. These aspects include the width, height, and the color of the node. Our nodes are rectangle shaped for clarity and organization. 
@@ -375,7 +410,10 @@ It would then be worth exploring alternatives that include
 more, or perhaps, all the information in the error vector when generating the
 colorings.
 
-\todo[inline]{Look at previous VizGEC work. - Nic}
+\todo[inline]{Look at previous VizGEC work. - Nic}\
+
+\section{Conclusions}
+\label{sec:conclusions}
 
 
 \bibliographystyle{abbrv}
