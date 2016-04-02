@@ -101,9 +101,27 @@
 
 \begin{abstract}
 
-Previous work has demonstrated the utility of graph databases as a tool for collecting and analyzing ancestry in evolutionary computation runs. That work focused on sections of individual runs, whereas this poster illustrates the application of these ideas on the entirety of large runs (up to one million individuals) and combinations of multiple runs.
+Previous work has demonstrated the utility of graph databases as a tool 
+for collecting, analyzing, and visualizing ancestry in evolutionary computation runs. 
+That work focused on sections of individual runs, whereas this paper 
+illustrates the application of these ideas on the entirety of large runs 
+(up to three hundred thousand individuals) and combinations of multiple runs.
 
-Here we use these tools to generate graphs showing \emph{all} the ancestors of successful individuals from a variety of stack-based genetic programming runs on software synthesis problems. These graphs highlight important moments in the evolutionary process. They also allow us to compare the dynamics when using different evolutionary tools, such as different selection mechanisms or representations, as well as comparing the dynamics for successful and unsuccessful runs.
+Here we use these tools to generate graphs showing \emph{all} the 
+ancestors of successful individuals from a variety of stack-based 
+genetic programming runs on software synthesis problems. These graphs 
+highlight important moments in the evolutionary process. They also 
+allow us to compare the dynamics when using different evolutionary tools, 
+such as the dynamics for successful and unsuccessful runs.
+
+As well as displaying these full ancestry graphs, we use a
+variety of standard techniques such as size, color, pattern,
+labeling, and opacity to visualize other important information such as fitness, 
+which genetic operators were used, and the distance between parent and
+child genomes. While this generates an extremely rich visualization,
+the amount of data can also be somewhat overwhelming, so we also
+explore techniques for filtering these graphs that allow us to better
+understand the key dynamics.
 
 \end{abstract}
 
