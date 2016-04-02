@@ -155,7 +155,7 @@ In this poster we illustrate the use of these tools as a means of exploring enti
 
 \section{Basic Structure}
 \label{sec:basics}
-These evolutionary computation runs are shown in the form of their ancestral trees. For a successful run, where at least one individual has found a solution to the problem, we get the ancestral tree by finding all individuals who have found a solution in the last generation. With these individuals, we go back through generations to grab their parents, grandparents, etc. until we have every ancestor of these individuals, up until the beginning generation. In an unsuccessful run, where no individual has found a solution to the problem, we get all of the individuals in the last generation (limited to 300 generations) and grab their ancestors to make the ancestral tree. 
+These genetic programming runs are shown in the form of their ancestral trees. For a successful run, where at least one individual has found a solution to the problem, we get the ancestral tree by finding all individuals who have reached a solution in the last generation. With these individuals, we go back through previous generations to grab their parents, grandparents, etc. until we have every ancestor of these individuals, up until the beginning generation. In an unsuccessful run, where no individual has found a solution to the problem, we get all of the individuals in the last generation (limited to 300 generations) and grab their ancestors to make the ancestral tree. 
 
 Each ancestry tree diagram is composed of nodes and edges, where the nodes represent individuals and the edges represent their parent-child relationship. An example of this basic structure is in Figure \ref{fig:lexRun0Basic}. From this basic structure, we modify aspects of the edges and nodes such as color and size to show more information about individuals or relationships in each run.
 
@@ -259,13 +259,13 @@ to a few dozen.
 %	\label{fig:runs92:2:filtered}
 %\end{figure*}
 
-%\begin{figure*}[tb]
-%	\begin{center}
-%		\includegraphics[width=0.5\textwidth]{../Figures/runs_92_2_1_99_dual_color_full_small.pdf}
-%	\end{center}
-%	\caption{Full ancestry graphs of 4 different runs (92, 2, 1, and 99), all with the same color map.}
-%	\label{fig:runs92:2:1:99:filtered}
-%\end{figure*}
+\begin{figure*}[tb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{../Figures/runs_92_2_1_99_dual_color_full_better_18ft.pdf}
+	\end{center}
+	\caption{Full ancestry graphs of 4 different runs (92, 2, 1, and 99), all with the same color map.}
+	\label{fig:runs92:2:1:99:filtered}
+\end{figure*}
 
 \section{Future work}
 \label{sec:futurework}
