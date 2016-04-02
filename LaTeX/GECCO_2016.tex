@@ -145,13 +145,55 @@ Here we use these tools to generate graphs showing \emph{all} the ancestors of s
 \section{Introduction}
 \label{sec:introduction}
 
+\todo[inline]{This is quite short/thin because it's what we had on the poster paper.
+We probably want to expand it now and improve the motivation.}
+
 Reporting results of genetic programming (GP) and evolutionary computation is frequently limited to aggregate statistics such as mean best fitness or percentage of successful runs. Unfortunately this fails to convey the complex dynamics of such evolutionary systems and obscures or omits potentially valuable information about \emph{why} the runs behaved as they did. Previous work~\cite{McPhee:2015:GPTP} has demonstrated the utility of graph databases as tools for collecting and analyzing ancestry in GP runs, but was focused on sections of individual runs.
 
 In this poster we illustrate the use of these tools as a means of exploring entire ancestry trees. We use the Titan graph database\footnote{\url{http://thinkaurelius.github.io/titan/}} along with the Gremlin shell and the Tinkerpop query tools\footnote{\url{https://tinkerpop.incubator.apache.org/}} to store the parent-child relationships from genetic programming runs, and to extract the ancestry trees of specified individuals. We then visualize these subgraphs using the Graphviz \texttt{dot} graph layout tool\footnote{\url{http://www.graphviz.org/}}.
 
-\section{Replace-Space-With-Newline}
+\section{Our test environment: PushGP \& Replace-Space-With-Newline}
 \label{sec:RSWN}
-\todo[inline]{-Nic}
+
+All the visualizations presented here are on runs using the Clojush
+implementation\footnote{https://github.com/lspector/Clojush} of the 
+PushGP genetic programming (GP) system~\cite{spector:2002:GPEM, 1068292}, 
+but all the ideas here
+could easily apply to almost any evolutionary computation system. The use
+of graph databases to capture ancestor lineage is a completely general
+concept, for example, and could be applied to any system that implements a
+notion of descent with modification. Some of the specifics of the visualization
+are tied to particular metrics (e.g., the Damerau-Levenshtein distance
+between Push program genomes), but these could be replaced with other
+metrics as appropriate to the application domain (e.g., manhattan distances
+between genetic algorithms bitstrings, or tree edit distances in
+tree-based GP).
+
+One important feature of the PushGP system is the use of \emph{lexicase
+selection}~\cite{Helmuth:2015:ieeeTEC}. One of the goals in the design of
+lexicase selection was the preservation of diversity of behaviors. The
+ancestry information in the graph databases and in the tree visualizations 
+in this paper can be used to visually and quantitatively check how
+well those goals are being met. One property of lexicase selection is
+that it enables the possibility of \emph{hyperselection} events~\cite{Helmuth:2016:GECCO},
+where an individual receives an extremely high proportion of the selections
+in a given generation. Occasionally, for example, an individual that
+"discovers" an important new behavior can receive over 90\% of the selections
+and consequently be a parent of nearly all the children in the next generation.
+These hyperselection events will be visually obvious in our graph visualizations
+below.
+
+We have applied the visualizations described here on a 
+number of different problems taken from a suite of software synthesis benchmark 
+problems~\cite{Helmuth:2015:GECCO}, but in the interest of space we
+will focus here on a single test problem: replace-space-with-newline.
+In replace-space-with-newline the goal is to evolve a program that takes a string
+as input and has two tasks: (a) it should print the input string, with all spaces
+replaced by newlines, and (b) it should return an integer that is the number of
+characters in the input string that were \emph{not} replaced. The use of
+these two distinct types of error values will be used in some of the visualizations
+as described in Section~\ref{sec:nodes}. The details of the system and
+settings used in these runs are as described in~\cite{Helmuth:2015:GECCO}.
 
 \section{Basic Structure}
 \label{sec:basics}
@@ -168,6 +210,8 @@ Each ancestry tree diagram is composed of nodes and edges, where the nodes repre
 \end{figure*}
 
 \section{Edges}
+\label{sec:edges}
+
 As stated previously, edges show the parent-child relationship in our ancestry diagrams. We've modified aspects of the edges such as color, style, width, and transparency to tell us more information about these runs. The color and style of an edge is based on what operator was used to create a child made. Here is the list of relations as \textbf{Style \& Color: Operator}.
 \begin{itemize}
 \setlength\itemsep{0em}
@@ -182,6 +226,8 @@ The width of an edge is determined by the Damerau--Levenshtein distance between 
 The last aspect of edges is their transparency. We based this on the number of ancestry children an individual had. Meaning, an incoming edge is more opaque if the individual had many children in the current ancestry tree. This helps us find the parents of popular individuals since these edges are not as transparent as others.
 
 \section{Nodes}
+\label{sec:nodes}
+
 Just as we adjust aspects of the edges in our diagrams to tell us more information about the runs, we adjust aspects of the nodes as well. These aspects include the width, height, and the color of the node. Our nodes are rectangle shaped for clarity and organization. 
 
 The width of a node is based on the individual's number of selections. This is the number of times an individual was selected to have a child in the overall run, not just in the ancestry tree. One thing to note about this is that an individual can be both parents of a child, so in this scenario it would have two selections. A node that is very wide will have a overall high number of selections. This tells us that this individual was selected often or was ``hyperselected''~\cite{Helmuth:2016:GECCO}, so it could be interesting to know more about it. 
@@ -271,7 +317,7 @@ to a few dozen.
 \label{sec:futurework}
 \todo[inline]{Autoconstruction, Dynamic views would be nice. Using google maps to visualize large graphs. Gephi. Centrality metrics. -Nic}
 
-
+Lexicase vs. tournament!
 
 \todo[inline]{Look at previous VizGEC work. - Nic}
 
