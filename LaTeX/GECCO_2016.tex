@@ -263,9 +263,9 @@ on up to 300,000 individuals.
 	\label{fig:lexRun0Basic}
 \end{figure}
 
-These evolutionary computation runs are shown in the form of their ancestry trees. For a successful run, where at least one individual has found a solution to the problem, we get the ancestry tree by finding all individuals who have found a solution in the final generation. With these individuals, we go back through generations to retrieve their parents, grandparents, etc. until we have every ancestor of these individuals, from start to finish. In an unsuccessful run, where no individual has found a solution to the problem, we take all of the individuals in the last generation (limited to 300 generations) and create a tree out of their ancestors.
+These evolutionary computation runs are shown in the form of their ancestry trees. For a successful run, where at least one individual has found a solution to the problem, we obtain the ancestry tree by finding all individuals who have discovered a solution in the final generation. With these individuals, we go back through the generations to retrieve their parents, grandparents, etc. until we have every ancestor of these individuals, from start to finish. In an unsuccessful run, where no individual has found a solution to the problem, we take all of the individuals in the last generation (limited to 300 generations) and create a tree out of their ancestors.
 
-Each ancestry tree diagram is composed of nodes and edges, where the nodes represent individuals and the edges represent their parent-child relationships. An example of this basic structure is in Figure \ref{fig:lexRun0Basic}. Improving upon this basic structure, we modify aspects of the edges and nodes such as color and size to show more information about individuals or relationships in each run.
+Each ancestry tree diagram is composed of nodes and edges, where the nodes represent individuals and the edges represent their parent-child relationships. An example of this basic structure is in Figure \ref{fig:lexRun0Basic}. Improving upon this basic structure, we modify aspects of the edges and nodes such as color and size to show more information about individuals and relationships in each run.
 
 \subsection{Edges}
 \label{sec:edges}
@@ -370,8 +370,8 @@ subgraphs that focus on specific areas or events in the runs. The left hand
 graph in Figure~\ref{fig:lexRun1FilteredAndFull}, for example, is the full 
 ancestry of the
 successful individual from one of our runs, and contains 22,435 nodes
-and 35,403 edges. This full ancestry graph which gives us a strong sense of the 
-large scale dynamics of the run, and the shape of the graph and the sizing and 
+and 35,403 edges. This full ancestry graph gives us a strong sense of the 
+large scale dynamics of the run, while the shape of the graph as well as the sizing and 
 coloring of nodes highlight some major events in the history of the run. There 
 are, however, large sections of the graph composed of hundreds of very small 
 nodes that make it very difficult to trace through and discover what might be 
@@ -385,17 +385,17 @@ the most important paths through that part of the genetic history.
 	\label{fig:lexRun1FilteredAndFull}
 \end{figure*}
 
-An obvious approach to this problem is to filter the results, and we have
+An obvious approach to this problem is to filter the results, we have
 already been using one simple filtering throughout the paper. In all the
 successful runs that we visualize here, we are only showing individuals that are
 ancestors of the successful individual(s) in the final generation.\footnote{Here
 	is one place where graph databases really shine. To extract this ancestry
 	information from a relational or document-oriented database would be an
 	expensive series of recursive queries. With a graph database system such as
-	TitanDB and Tinkerpop, however, this becomes a simple one line query.} If we
-visualized \emph{every} individual in the run visualized in
-Figure~\ref{fig:lexRun1FilteredAndFull}, for example, that graph would contain
-would contain over six times as many elements, with 130,000 nodes and 219,541
+	TitanDB and Tinkerpop, however, this becomes a simple one line query.} For example, if we
+visualized \emph{every} individual in the run shown in
+Figure~\ref{fig:lexRun1FilteredAndFull} the graph would contain
+ over six times as many elements, with 130,000 nodes and 219,541
 edges. Most individuals in evolutionary systems aren't ultimately ancestors of
 individuals in the final population; they're evolutionary ``dead ends'', either
 because they have no children, or their descendants eventually fail to have
@@ -408,26 +408,26 @@ number of nodes in a generation (row of the graph) from the original 1,000 to
 
 As discussed above, while this filtering strongly focuses the visualization,
 this still can leave us with too much information if our goal is to trace key
-paths through the history. Here we demonstrate the use a combination of 
+paths through the history. Here we demonstrate the use of a combination of 
 ancestry information and genome distances between parents to substantially 
 tighten the focus of the ancestry graphs. The key idea, which grew out of 
 observations of our early graphs, is to use a distance metric to determine 
 which parents are contributing ``substantial'' genetic material to the 
-resulting child to identify crossovers where one of the parents contributed the 
+resulting child. This allows identification of crossovers where one of the parents contributed the 
 preponderance of the child's genetic material. If we filter out parents that 
 are making limited contributions to their children's genetics, then we end up
-recursively removing many of their ancestors as well, profounding thinning the
+recursively removing many of their ancestors as well, profoundly thinning the
 graph.
 
 Unfortunately there's no easy way to guarantee that any non-zero contribution, 
 however small, might not in fact be crucial to the behavior of the child. A 
 parent might only contribute one instruction to its child, but that could be 
-the vital piece that leads to a solution. Even worse, it's possible that
+the vital piece that leads to a solution. Even worse, it's possible that the
 \emph{presence} of an individual could have had a subtle but important impact 
 on the dynamics of a run even if that individual never directly contributed any 
 genetic material to the eventually successful individual. Acknowledging those
 complexities, we have still found it useful to filter ancestry trees, 
-recognizing that we might need ``unfilter'' some individuals if further
+recognizing that we might need to ``unfilter'' some individuals if further
 analysis suggests that their contributions were more substantial than initially
 expected.
 
@@ -439,7 +439,7 @@ parent and child genomes. Our filtering algorithm was fairly simplistic: Assume 
 	s & = \textrm{genome-length}(c)
 \end{align*}
 and assume without loss of generality that $a \leq b$.
-Then we filtered out parent $q$ if either:
+Then filter out parent $q$ if either:
 \[
 	a < 0.2 \times s
 \]
@@ -459,11 +459,11 @@ version of a graph.
 \todo[inline]{I (Nic) feel like the discussion from here to the end of the section may have gotten a little long. I want to provide some evidence that we can see and \emph{learn} things from these graphs, but we don't just want to babble on endlessly about random bits and pieces in these graphs. My guess is that we'll need to trim some to get back to 8 after the other bits are filled in, and this might be a place to come back to.}
 
 Returning to Figure~\ref{fig:lexRun1FilteredAndFull}, the right hand graph is
-a filtered version of the left hand graph. Both graphs using the same RBM
+a filtered version of the left hand graph. Both graphs use the same RBM
 coloring, so it is in many cases possible to pick out corresponding individuals
 in the two graphs. In the filtered graph, however, it's entirely possible to
 trace every relationship from the beginning of the run to the successful
-individual 130 generations later, where this is really not possible in the
+individual 130 generations later, where this is u in the
 unfiltered graph. The filtered graph has 1,597 vertices and 1,794 edges, roughly
 20 times fewer than in the unfiltered graph, and roughly 100 times fewer than
 in the full graph.
@@ -477,14 +477,14 @@ around generation 20, however, the dynamics in both runs start to become more
 complex, with both graphs moving to more individuals in each generation and a
 more complex edge structure. Proportionally, however, the unfiltered graph
 widens out much more than the unfiltered graph, suggesting that while many of
-those individuals in unfiltered graph might have been ancestors of the winner,
+those individuals in the filtered graph might have been ancestors of the winner,
 it's also likely that many of them didn't make a substantial contribution to
 the successful individual. While the unfiltered graph remains quite wide up to
 generation 56 or so, the filtered graph starts to thin out, leading to a fairly
 small set of largely linear ``threads''. In generation 50, for example, the 
 unfiltered graph has 305 individuals out of the 1,000 individuals in that 
-generation, where the filtered graph only has 13 individuals. While the nodes in
-those threads are quite small, several of the threads are sequences individuals
+generation, whereas the filtered graph only has 13 individuals. While the nodes in
+those threads are quite small, several of the threads are sequences of individuals
 whose colors are similar within the thread, but different from the colors in
 other threads. This suggests (and additional analysis of the data in the
 database further supports) that at least some of these threads may represent
