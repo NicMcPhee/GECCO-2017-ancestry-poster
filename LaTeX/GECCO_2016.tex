@@ -75,7 +75,6 @@
 %	\affaddr{Univ. of Minnesota, Morris}\\
 %	\affaddr{Morris, MN USA-56267}\\
 %	\email{casal033@morris.umn.edu}
-%\and
 %\alignauthor
 %Mitchell Finzel \\
 %	\affaddr{Div. of Science and Math}\\
@@ -250,17 +249,18 @@ settings used in these runs are as described in~\cite{Helmuth:2015:GECCO}.
 
 \section{Basic Graph Structure}
 \label{sec:basics}
+
+\begin{figure}[b]
+	\begin{center}
+		\includegraphics[width=\linewidth]{../Figures/run0_basic_structure.pdf}
+	\end{center}
+	\caption{Basic layout of ancestry trees, showing parent-child relationships. Generations are labeled on the left-hand side.}
+	\label{fig:lexRun0Basic}
+\end{figure}
+
 These evolutionary computation runs are shown in the form of their ancestry trees. For a successful run, where at least one individual has found a solution to the problem, we get the ancestry tree by finding all individuals who have found a solution in the final generation. With these individuals, we go back through generations to retrieve their parents, grandparents, etc. until we have every ancestor of these individuals, from start to finish. In an unsuccessful run, where no individual has found a solution to the problem, we take all of the individuals in the last generation (limited to 300 generations) and create a tree out of their ancestors.
 
 Each ancestry tree diagram is composed of nodes and edges, where the nodes represent individuals and the edges represent their parent-child relationships. An example of this basic structure is in Figure \ref{fig:lexRun0Basic}. Improving upon this basic structure, we modify aspects of the edges and nodes such as color and size to show more information about individuals or relationships in each run.
-
-\begin{figure*}
-	\begin{center}
-		\includegraphics[width=0.9\textwidth]{../Figures/run0_basic_structure.pdf}
-	\end{center}
-	\caption{Basic layout of successful ancestry trees, showing parent-child relationships. Generations are labeled on the left-hand side.}
-	\label{fig:lexRun0Basic}
-\end{figure*}
 
 \subsection{Edges}
 \label{sec:edges}
@@ -295,6 +295,14 @@ two distinct types of errors (see Section~\ref{sec:testEnv}). The second,
 \emph{RBM coloring}, uses restricted Boltzmann machines (RBMs) to compress
 the 200 error values into three RGB color values.
 
+\begin{figure*}
+	\begin{center}
+		\includegraphics[width=\textwidth]{../Figures/run0_dual_and_RBM_full.pdf}
+	\end{center}
+	\caption{Dual Colored (left) and RBM Colored (right) versions of a successful lexicase run ancestry tree.}
+	\label{fig:lexRun0DualAndRBM}
+\end{figure*}
+
 The \emph{dual coloring} approach uses hue-saturation-lightness (HSL) coloring
 based on the ``success'' of a given individual. 
 The Replace Space With Newline problem is special in the sense that there are 
@@ -323,13 +331,29 @@ vectors where every non-zero value was converted to 1, and the outputs were
 interpreted as 24-bit RGB colors. This allowed us to see valuable relationships
 between individuals that were successful on similar sets of test cases. An example of this in also in Figure \ref{fig:lexRun0DualAndRBM} on the right-hand side.
 
-\begin{figure*}
-	\begin{center}
-		\includegraphics[width=\textwidth]{../Figures/run0_dual_and_RBM_full.pdf}
-	\end{center}
-	\caption{Dual Colored (left) and RBM Colored (right) versions of a successful lexicase run ancestry tree.}
-	\label{fig:lexRun0DualAndRBM}
-\end{figure*}
+Figure~\ref{fig:lexRun0DualAndRBM} shows both color schemes side-by-side on the same
+ancestry tree from a short, successful run. Both colorings clearly highlight major
+changes in the error vectors over time, but in different ways. In the center of the 
+dual color graph, for example, there is a large individual that is purple on the left
+side and green on the right, with the green indicating a major improvement on the
+test cases that require a returned value. It's also worth noting that the size of
+this individual indicates that it received a high proportion of the parent selections,
+and was a parent of a substantial number of the individuals in the next generation.
+The fact that the incoming edge is solid orange tells us that it was created through
+uniform mutation, suggesting that a fairly small change to the genome led to a
+substantial change in the behavior. Five generations later we see a large node that
+is yellow on the left and purple on the right. The bright yellow indicating that 
+it is perfect on most of the printing test cases, with low total error on across all
+the printing test cases. The purple suggests that individual is not very successful
+on the integer return test cases. This individual's behavior is thus a ``mirrored'' 
+version of the behavior of its purple-green ancestor from five generations earlier.
+
+The RBM coloring on the right hand side of Figure~\ref{fig:lexRun0DualAndRBM} does not
+capture the differences between the two types of test cases, but still reflects the
+same major changes in its color scheme. It's coloring also shows more variation in the
+coloring in the first half of the run, where the low brightness in the dual color
+graph limits the visible variations.
+
 
 \section{Filtering}
 \label{sec:filtering}
@@ -337,26 +361,50 @@ between individuals that were successful on similar sets of test cases. An examp
 While the large graphs of full runs can provide an excellent ``big picture'' 
 view of the run dynamics, there is \emph{so} much information that it can be
 difficult to isolate specific features. We can, however, extract and visualize
-subgraphs that focus on specific areas or events in the runs.
-
-One simple example of this sort of filtering that we've already introduced is
-looking only at individuals that are in fact ancestors of individuals in the
-final generation. Most individuals in evolutionary systems aren't ultimately
-ancestors of individuals in the final population; they're evolutionary ``dead ends'',
-either because they have no children, or their descendants eventually fail to have
-children. All the graphs provided so far have used this filtering to substantially
-cut down on the number of visualized nodes. This typically reduces the number of nodes in a
-generation (row of the graph) from the original 1,000 to 300 or less, and sometimes down
-to a few dozen.
+subgraphs that focus on specific areas or events in the runs. The left hand graph
+in Figure~\ref{fig:lexRun1FilteredAndFull}, for example, is the full ancestry of the
+successful individual from one of our runs, and contains 22,435 nodes
+and 35,403 edges. This full ancestry graph which gives us a strong sense of the 
+large scale dynamics of the run, and the shape of the graph and the sizing and coloring 
+of nodes highlight some major events in the history of the run. There are, however,
+large sections of the graph composed of hundreds of very small nodes that make it very
+difficult to trace through and discover what might be the most important paths through
+that part of the genetic history.
 
 \begin{figure*}[tb]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{../Figures/run1_RBM_color_filtered_and_full_60000.pdf}
 	\end{center}
-	\caption{Unfiltered (left) and filtered (right) versions of a successful lexicase run, both with the same color map.}
+	\caption{Unfiltered (left) and filtered (right) versions of a successful run, both with the same color map.}
 	\label{fig:lexRun1FilteredAndFull}
 \end{figure*}
 
+An obvious approach to this problem is to filter the results, and we have already
+been using one simple filtering throughout the paper. In all the successful runs
+that we visualize here, we are only showing individuals that are ancestors of the
+successful individual(s) in the final generation.\footnote{Here is one place where
+graph databases really shine. To extract this ancestry information from a relational
+or document-oriented database would be an expensive series of recursive queries. With
+a graph database system such as TitanDB and Tinkerpop, however, this becomes a 
+simple one line query.}
+If we visualized \emph{every}
+individual in the run visualized in Figure~\ref{fig:lexRun1FilteredAndFull}, for 
+example, that graph would contain would contain over six times as many elements,
+with 130,000 nodes and 219,541 edges. Most individuals in evolutionary systems 
+aren't ultimately
+ancestors of individuals in the final population; they're evolutionary ``dead ends'',
+either because they have no children, or their descendants eventually fail to have
+children. All the graphs in this paper use this type of filter to substantially
+cut down on the number of visualized nodes, only looking at
+ancestors of successful individuals or, in the case of unsuccessful runs, only
+looking at ancestors of individuals in the final generation. This typically 
+reduces the number of nodes 
+in a generation (row of the graph) from the original 1,000 to 300 or less, and sometimes 
+down to a few dozen.
+
+As discussed above, while this filtering strongly focuses the visualization, this still 
+can leave us with too much information if our goal is to trace key paths through the 
+history. 
 
 \section{Comparing runs}
 \label{sec:comparisons}
