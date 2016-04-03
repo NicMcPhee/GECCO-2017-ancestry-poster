@@ -511,11 +511,36 @@ strongly dominate the dynamics in the last few generations.
 \section{Comparing runs}
 \label{sec:comparisons}
 
-% In this section we'll look at multiple successful runs in their filtered
-% versions. We'll create a RBM color scheme which incorporates all error vectors
-% in the filtered ancestries. This will allow us to see similar individual in 
-% other runs. Ex) You may see red at the top of one run, and at the end of another. Which could imply that oine found a solution earlier.
+In this section we will demonstrate the ability to graph multiple runs side by
+side for comparison, similar to the unfiltered and filtered graphs in 
+Figure~\ref{fig:lexRun1FilteredAndFull}. We will first compare three successful
+runs, and then a collection of four different runs, two of which were successful 
+and two of which were not.
+
 \subsection{Successful Runs}
+
+Figure~\ref{fig:runs1:99:6:filtered} shows the filtered graphs from three successful 
+runs using the same RBM color scheme for all three.\footnote{The leftmost graph in
+Figure~\ref{fig:runs1:99:6:filtered} is the same data as the rightmost (filtered)
+graph in Figure~\ref{fig:lexRun1FilteredAndFull} above, with a different RBM coloring
+and a slightly different layout.} 
+The shared color scheme allows us to see similar individuals (in terms of error vectors)
+across multiple runs. All these runs, for example, start with green nodes, suggesting
+those individuals have similar error vectors. It is interesting to note that the two
+leftmost graphs both have several very strongly selected nodes in the first 15 generations
+that introduce new but related colors, with both runs having both blue and pink nodes.
+The rightmost graph, on the other hand, remains primarily green for quite a bit longer
+and does not have many highly selected individuals until around generation 40. Some of 
+the new colors introduced in that graph are blues that look similar to the two leftmost
+graphs, but there are also beige nodes that appear different from the early nodes in
+the other graphs.
+
+All three runs share some substantial large scale features. All have initial ``settling out''
+periods, which eventually develop into a relatively small set of largely linear lineages.
+All have one or more ``knots'' where there are higher degrees of connectivity for several 
+generations before returning to the more linear ancestries. The end of all three runs
+feature several very strong hyperselection events.
+
 \begin{figure*}[tb]
 	\begin{center}
 		\includegraphics[height=0.95\textheight]{../Figures/runs_1_99_6_RBM_color_filtered3.pdf}
@@ -530,6 +555,29 @@ strongly dominate the dynamics in the last few generations.
 % the generation sizes and get the visual impact of a failed run.
 
 \subsection{Successful vs. Failed Runs}
+
+Figure~\ref{fig:runs92:2:1:99:filtered} shows the full unfiltered ancestries for four
+different runs. The leftmost two were unsuccessful, so these graphs show the ancestors
+of all the individuals present in the final generation.\footnote{In fact we have removed
+the last two generations from the unsuccessful graphs since those have many more individuals
+than the earlier generations, and their presence distorts the layout.} 
+The rightmost two graphs are
+from successful runs (the leftmost two from Figure~\ref{fig:runs1:99:6:filtered}). All
+four graphs use the same dual color scheme, which shows that in all four cases similar
+individuals are discovered early that are very successful (bright yellow) on the integer
+return cases (right hand side of nodes) and have similar (purple) success rates on the
+printing cases (left hand side of nodes). The most selected individuals in the initial
+random populations for the two unsuccessful runs on the left have very dark colors on the
+right hand sides of their nodes, indicating that the most selected initial individuals
+had \emph{very} high total error on the integer return cases.
+
+After the initial settingling out, run 2 (the right hand unsuccessful run) has no
+significant hyperselection events, and no substantial changes in the visual structure of
+the graph. The other three runs, however, have a variety of highly selected individuals,
+and associated changes in the shape of their graphs. It's possible, therefore, that run
+92 (the leftmost graph) might have eventually discovered a solution if given more generations,
+where run 2 seems hopelessly lost.
+
 \begin{figure*}[tb]
 	\begin{center}
 		\includegraphics[height=.8\textheight]{../Figures/runs_92_2_1_99_dual_color_full_better_18ft.pdf}
