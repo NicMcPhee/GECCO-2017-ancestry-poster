@@ -169,7 +169,7 @@ dynamics of such evolutionary systems and obscures or omits potentially valuable
 information about \emph{why} the runs behaved as they did. While it's clearly
 valuable to know that Approach A is ``better'' in some sense (e.g., more successes)
 than Approach B, it is also valuable to understand \emph{why} it succeeds more 
-often, a question that summary statistics rarely shed any light on.
+often, a question that summary statistics rarely sheds any light on.
 
 One way to move past the limitations of summary statistics is to collect ancestry
 information on runs, recording and analyzing parent--child 
@@ -288,7 +288,7 @@ The last aspect of edges is their transparency. We based this on the number of a
 
 Just as we adjust aspects of the edges in our diagrams to tell us more information about the runs, we adjust aspects of the nodes as well. Building off of a rectangular shape that we use for clarity and organization, we alter the width, height, and the color of the node.
 
-The width of a node is based on the individual's number of selections. This is the number of times an individual was selected to have a child in the overall run, not just in the ancestry tree. One thing to note about this is that an individual can be both parents of a child, in this scenario it would be counted as two selections. A node that is very wide will have an overall high number of selections. This tells us that this individual was selected often or was \textit{hyperselected}~\cite{Helmuth:2016:GECCO}, which may be a point of interest for further investigations. 
+The width of a node is based on the individual's number of selections. This is the number of times an individual was selected to have a child in the overall run, not just in the ancestry tree. One thing to note about this is that an individual can be both parents of a child, in which case it would be counted as two selections. A node that is very wide will have an overall high number of selections. This tells us the individual was selected often or was \textit{hyperselected}~\cite{Helmuth:2016:GECCO}, which may be a point of interest for further investigations. 
 
 The height of a node is based on the individual's number of ancestry children. Similar to the opacity of an edge, the more children a node has in this ancestry tree, the taller the node.
 
@@ -318,7 +318,7 @@ to each half, with the color of the left side of a node based on the
 printing errors, and the color on the right side based on the return errors.
 For a test case to be passing, there needs to be an error of zero. 
 The hue of one half of a node is based on the percent of zeros, i.e., 
-successful cases, for that half. The hue ranges from red (the worst, with no zeros) to yellow (the best, with all zeros). This coloring tells us how many test cases an individual solves, but gives no information on how far off it is on the other test cases, so we incorporated lightness into the coloring as well. The lightness of one side of a node is based on the individual's total error on that half of the test cases, with higher total errors receiving darker shading. An example of this is in Figure \ref{fig:lexRun0DualAndRBM}, where the \textit{dual coloring} graph is one the left-hand side.
+successful cases, for that half. The hue ranges from red (the worst, with no zeros) to yellow (the best, with all zeros). This coloring tells us how many test cases an individual solves, but gives no information on how far off it is on the other test cases. For this we incorporated lightness into the coloring as well. The lightness of one side of a node is based on the individual's total error on that half of the test cases, with higher total errors receiving darker shading. An example of this is in Figure \ref{fig:lexRun0DualAndRBM}, where the \textit{dual coloring} graph is on the left-hand side.
 
 One potential concern with the dual coloring approach is that we are simply 
 counting successful test cases to determine the hue, and using the total
@@ -348,8 +348,8 @@ The fact that the incoming edge is solid orange tells us that it was created thr
 uniform mutation, suggesting that a fairly small change to the genome led to a
 substantial change in the behavior. Five generations later we see a large node that
 is yellow on the left and purple on the right. The bright yellow indicating that 
-it is perfect on most of the printing test cases, with low total error on across all
-the printing test cases. The purple suggests that individual is not very successful
+it is perfect on most of the printing test cases, with low total error across these same cases.
+The purple suggests this individual is not very successful
 on the integer return test cases. This individual's behavior is thus a ``mirrored'' 
 version of the behavior of its purple-green ancestor from five generations earlier.
 
