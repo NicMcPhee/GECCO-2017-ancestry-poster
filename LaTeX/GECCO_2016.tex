@@ -463,23 +463,19 @@ a filtered version of the left hand graph. Both graphs use the same RBM
 coloring, so it is in many cases possible to pick out corresponding individuals
 in the two graphs. In the filtered graph, however, it's entirely possible to
 trace every relationship from the beginning of the run to the successful
-individual 130 generations later, where this is u in the
+individual 130 generations later, where this is unfeasible in the
 unfiltered graph. The filtered graph has 1,597 vertices and 1,794 edges, roughly
 20 times fewer than in the unfiltered graph, and roughly 100 times fewer than
 in the full graph.
 
-Comparing the two graphs, they both reveal several important events and phases 
-in the run, but sometimes in different ways. Both graphs show an initial 
+Comparing the two graphs reveals several important events and phases 
+in the run. Both graphs show an initial 
 ``settling out'' phase, where most of the initial random population contributes
 little or nothing and there are quite a few very strong selection events as
 evidenced by the variety of wide nodes in the early generations. Starting
 around generation 20, however, the dynamics in both runs start to become more
 complex, with both graphs moving to more individuals in each generation and a
-more complex edge structure. Proportionally, however, the unfiltered graph
-widens out much more than the unfiltered graph, suggesting that while many of
-those individuals in the filtered graph might have been ancestors of the winner,
-it's also likely that many of them didn't make a substantial contribution to
-the successful individual. While the unfiltered graph remains quite wide up to
+more complex edge structure. While the unfiltered graph remains quite wide up to
 generation 56 or so, the filtered graph starts to thin out, leading to a fairly
 small set of largely linear ``threads''. In generation 50, for example, the 
 unfiltered graph has 305 individuals out of the 1,000 individuals in that 
@@ -488,14 +484,9 @@ those threads are quite small, several of the threads are sequences of individua
 whose colors are similar within the thread, but different from the colors in
 other threads. This suggests (and additional analysis of the data in the
 database further supports) that at least some of these threads may represent
-sub-populations that are focusing on different parts of the problem. This sort
-of separation would be hard to maintain using aggregate fitnesses, as the
-individuals with lower total error would eventually displace those with higher 
-total error. This suggests that lexicase selection may be playing an important
-role in maintaining diversity in the population, preserving sub-populations that
-focus on different aspects of the problem.
+sub-populations that are focusing on different parts of the problem.
 
-Both graphs show a significant change by generation 63, with a series of
+Moving further into the run, both graphs show a significant change by generation 63, with a series of
 hyperselection events suggesting that there is some sort of discovery. In the
 unfiltered graph this expresses itself as a strong narrowing of the graph, as
 the hyperselection events substantially reduce the number of individuals in
@@ -505,8 +496,8 @@ threads give way to a ``knot'' of more individuals with much less linear
 ancestries with more complex mixing. After a while this settles down, with the
 unfiltered graph widening back out and the filtered graph returning to a
 decreasing number of mostly linear ancestries. At the end of the run there are
-clearly some major discoveries that lead to large hyperselection events that
-strongly dominate the dynamics in the last few generations.
+visual indications of major discoveries that lead to large hyperselection events that
+dominate the dynamics in the last few generations.
 
 \section{Comparing runs}
 \label{sec:comparisons}
