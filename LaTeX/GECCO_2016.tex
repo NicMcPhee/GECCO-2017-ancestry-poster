@@ -334,7 +334,7 @@ tool~\cite{hinton2006reducing}. Here we trained RBM autoencoders to map 200-bit
 vectors to 24-bit vectors, where the inputs were binary versions of the error
 vectors where every non-zero value was converted to 1, and the outputs were
 interpreted as 24-bit RGB colors. This allowed us to see valuable relationships
-between individuals that were successful on similar sets of test cases. An example of this in also in Figure \ref{fig:lexRun0DualAndRBM} on the right-hand side.
+between individuals that were successful on similar sets of test cases. 
 
 Figure~\ref{fig:lexRun0DualAndRBM} shows both color schemes side-by-side on the same
 ancestry tree from a short, successful run. Both colorings clearly highlight major
@@ -598,9 +598,8 @@ valuable information. There are situations, for example, where an individual has
 an error of 1 on a large group of test cases; such an individual is assigned
 the same RBM color as an individual with an error of 1,000 on all those cases,
 despite the fact that it's \emph{much} closer to the desired answer.
-It would then be worth exploring alternatives that include
-more, or perhaps, all the information in the error vector when generating the
-colorings.
+It would then be worth exploring alternatives that include more, or perhaps, 
+all the information in the error vector when generating the colorings.
 
 \todo[inline]{Look at previous VizGEC work. - Nic}\
 
