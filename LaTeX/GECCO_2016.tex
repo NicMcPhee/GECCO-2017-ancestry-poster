@@ -110,8 +110,7 @@ Here we use these tools to generate graphs showing \emph{all} the
 ancestors of successful individuals from a variety of stack-based 
 genetic programming runs on software synthesis problems. These graphs 
 highlight important moments in the evolutionary process. They also 
-allow us to compare the dynamics when using different evolutionary tools, 
-such as the dynamics for successful and unsuccessful runs.
+allow us to compare the dynamics for successful and unsuccessful runs.
 
 As well as displaying these full ancestry graphs, we use a
 variety of standard techniques such as size, color, pattern,
@@ -157,26 +156,26 @@ understand the key dynamics.
 
 \printccsdesc
 
-\keywords{visualization; genetic programming; graph database; ancestry}
+\keywords{visualization; genetic programming; graph database; ancestry; lineage}
 
 \section{Introduction}
 \label{sec:introduction}
 
-Our reporting of results in genetic programming (GP) and evolutionary computation 
-is frequently limited to aggregate statistics such as mean best fitness or 
+Reporting of results in genetic programming (GP) and evolutionary computation 
+research is frequently limited to aggregate statistics such as mean best fitness or 
 percentage of successful runs. Unfortunately this fails to convey the complex 
 dynamics of such evolutionary systems and obscures or omits potentially valuable 
 information about \emph{why} the runs behaved as they did. While it's clearly
 valuable to know that Approach A is ``better'' in some sense (e.g., more successes)
-than Approach B, it is also valuable to understand \emph{why} it succeeds more 
-often, a question that summary statistics rarely sheds any light on.
+than Approach B, it's also valuable to understand \emph{why} it succeeds more 
+often, a question that summary statistics rarely shed any light on.
 
 One way to move past the limitations of summary statistics is to collect ancestry
 information on runs, recording and analyzing parent--child 
 relationships~\cite{burlacu2013visualization,cruz2015elicit,hart2001gavel,vaseux2013event}. \
 Most previous ancestry
 work has been limited to fairly small datasets, however, in part because of the
-challenges of storing and working effectively with the hundreds of thousands of
+challenges of storing and working effectively and efficiently with the hundreds of thousands of
 ancestry relationships present in most evolutionary computation runs.
 
 Previous work~\cite{McPhee:2015:GPTP} has demonstrated the utility of graph databases as 
@@ -184,7 +183,7 @@ tools for collecting and analyzing large collections of ancestry data from GP ru
 helping to identify key moments in runs, and general behavioral trends. That work,
 however, was focused on sections of individual runs. In this paper we illustrate the 
 use of these tools as a means of visualizing and exploring entire 
-ancestry trees, and combinations of ancestry trees. 
+ancestry trees, as well as combinations of ancestry trees. 
 We use the Titan graph database\footnote{\url{http://
 thinkaurelius.github.io/titan/}} along with the Gremlin shell and the Tinkerpop query 
 tools\footnote{\url{https://tinkerpop.apache.org/}} to store the parent-child 
@@ -212,9 +211,9 @@ implementation\footnote{\url{https://github.com/lspector/Clojush}} of the
 PushGP genetic programming (GP) system~\cite{1068292,spector:2002:GPEM}, 
 but all of the ideas here
 could easily apply to almost any evolutionary computation system. The use
-of graph databases to capture ancestor lineage is a completely general
-concept, for example, and could be applied to any system that implements a
-notion of descent with modification. Some of the specifics of the visualization
+of graph databases to capture ancestor lineages is a completely general
+concept and could be applied to any system that implements a
+notion of descent with modification. Some of the visualization specifics
 are tied to particular metrics (e.g., the Damerau--Levenshtein distance
 between linear genomes), but these could be replaced with other
 metrics as appropriate to the application domain (e.g., manhattan distances
@@ -222,8 +221,8 @@ between genetic algorithms bitstrings, or tree edit distances in
 tree-based GP).
 
 One important feature of the PushGP system is the use of \emph{lexicase
-selection}~\cite{Helmuth:2015:ieeeTEC}. One of the goals in the design of
-lexicase selection was the preservation of diversity of behaviors. The
+selection}~\cite{Helmuth:2015:ieeeTEC}. One of the design goals for
+lexicase selection was the preservation of behavior diversity. The
 ancestry information in the graph databases and in the tree visualizations 
 in this paper can be used to visually and quantitatively check how
 well those goals are being met. One property of lexicase selection is
@@ -242,7 +241,7 @@ will focus here on a single test problem: Replace Space With Newline.
 In Replace Space With Newline the goal is to evolve a program that takes a string
 as input and has two tasks: (a) it should print the input string, with all spaces
 replaced by newlines, and (b) it should return an integer that is the number of
-characters in the input string that were \emph{not} replaced. The use of
+characters in the input string that were \emph{not} replaced. The existance of
 these two distinct types of error values will be used in some of the visualizations
 as described in Section~\ref{sec:nodes}. 
 
@@ -250,27 +249,47 @@ The details of the system and settings used in these runs are as described
 in~\cite{Helmuth:2015:GECCO}. There are, however, two parameters that are 
 directly relevant to these visualizations: The population size was 1,000, and the runs were stopped after 300 generations if a successful individual was not 
 found. This means that we were storing and processing considerable information
-on up to 300,000 individuals.
+on up to 300,000 individuals per run. We have also generated visualizations on runs
+in other settings where there were over a million individuals; these graphs are too
+large to meaningful include in a paper such as this.
 
-\section{Basic Graph Structure}
+\section{Visualizing ancestry graphs}
 \label{sec:basics}
 
-\begin{figure}[b]
+Our primary visualization of these evolutionary computation runs is via ancestry trees
+where individuals are represented as nodes, and parent-child relationships are 
+represented as edges. An example of this basic structure is illustrated in 
+Figure \ref{fig:lexRun0Basic}. 
+
+\begin{figure}
 	\begin{center}
 		\includegraphics[width=\linewidth]{../Figures/run0_basic_structure.pdf}
 	\end{center}
-	\caption{Basic layout of ancestry trees, showing parent-child relationships. Generations are labeled on the left-hand side.}
+	\caption{Basic layout of ancestry trees, showing parent-child relationships. Generations are labeled on the left-hand side and run from generation 0 (the start of the run) at the top down to the end of the run at the bottom.}
 	\label{fig:lexRun0Basic}
 \end{figure}
 
-These evolutionary computation runs are shown in the form of their ancestry trees. For a successful run, where at least one individual has found a solution to the problem, we obtain the ancestry tree by finding all individuals who have discovered a solution in the final generation. With these individuals, we go back through the generations to retrieve their parents, grandparents, etc. until we have every ancestor of these individuals, from start to finish. In an unsuccessful run, where no individual has found a solution to the problem, we take all of the individuals in the last generation (limited to 300 generations) and create a tree out of their ancestors.
+For a successful run, where at least one individual has found a solution to the problem, we 
+obtain the ancestry tree by first finding all individuals who have discovered a solution in the 
+final generation. With these individuals, we go back through the generations to retrieve 
+their parents, grandparents, etc. until we have every ancestor of these individuals, from 
+start to finish. In an unsuccessful run, where no individual has found a solution to the 
+problem, we take all of the individuals in the last generation 
+and create a tree out of their ancestors.
 
-Each ancestry tree diagram is composed of nodes and edges, where the nodes represent individuals and the edges represent their parent-child relationships. An example of this basic structure is in Figure \ref{fig:lexRun0Basic}. Improving upon this basic structure, we modify aspects of the edges and nodes such as color and size to show more information about individuals and relationships in each run.
+The visualization in Figure~\ref{fig:lexRun0Basic} captures the basic ancestry structure,
+but conveys no information about the particular individuals, or their relationships. In
+the remainder of this section we'll describe several techniques which greatly increase
+information density of the visualizations.
 
 \subsection{Edges}
 \label{sec:edges}
 
-As stated previously, edges show the parent-child relationship in our ancestry diagrams. We've modified aspects of the edges such as color, style, width, and transparency to tell us more information about these runs. The color and style of an edge is based on what operator was used to create a child. Here is the list of relations as \textbf{Style \& Color: Operator}.
+As stated previously, edges show the parent-child relationship in our ancestry diagrams. 
+To increase the amount of information conveyed in these visualizations, however, we
+use aspects of the edges such as color, style, width, and transparency to convey
+more information about these runs.  First, we use the color and style of an edge to 
+indicate what operator or combination of operators was used to create a child:
 \begin{itemize}
 \setlength\itemsep{0em}
 \item Solid \& Black: Alternation, followed by Uniform Mutation
@@ -279,15 +298,25 @@ As stated previously, edges show the parent-child relationship in our ancestry d
 \item Dashed \& Orange: Uniform Closed Mutation
 \end{itemize}
 
-The width of an edge is determined by the Damerau--Levenshtein distance~\cite{wiki:DLdist} between a parent's and child's genome.\footnote{The Clojush system uses linear Plush genomes that are then converted to PushGP programs. All genetic operations act on these genomes.} We use this as a measure to determine how similar a child is to its parent. The smaller the Damerau--Levenshtein distance, the more similar their genomes are. With edges, if a child is similar to its parent, the wider the edge will be. In converse, the more dissimilar a child is from its parent, the thinner the edge will be.
+The width of an edge is determined by the Damerau--Levenshtein 
+distance~\cite{wiki:DLdist} between a parent's and child's genome.\footnote{The Clojush 
+	system uses linear Plush genomes that are then converted to PushGP programs. All genetic operations act on these genomes.} 
+We use the Damerau--Levenshtein distance as a measure of how similar a child is to its 
+parent; the smaller this distance, the more similar their genomes. Since we want to
+emphasize strong parent-child relationships, we set the edge to be width of the edge
+to be inversely proportionate to the distance; if a child is similar to its parent, 
+the wider the edge will be, and larger distances will result in thinner edges.
 
-The last aspect of edges is their transparency. We based this on the number of ancestry children an individual had. Meaning, an incoming edge is more opaque if the individual had many children in the current ancestry tree. This helps us find the parents of popular individuals since these edges are more opaque than others.
+The last aspect of edges is their transparency, which we based on the number children an 
+individual has in this graph. An incoming edge is more opaque if the individual has many 
+children in the current ancestry tree. This helps us find the parents of individuals that have
+many children in the displayed tree since these edges are more opaque than others.
 
 \begin{figure*}
 	\begin{center}
 		\includegraphics[width=\textwidth]{../Figures/run0_dual_and_RBM_full.pdf}
 	\end{center}
-	\caption{Dual Colored (left) and RBM Colored (right) versions of a successful lexicase run ancestry tree.}
+	\caption{Dual Colored (left) and RBM Colored (right) versions of a successful lexicase run (run 0) ancestry tree.}
 	\label{fig:lexRun0DualAndRBM}
 \end{figure*}
 
@@ -302,11 +331,20 @@ The last aspect of edges is their transparency. We based this on the number of a
 \subsection{Nodes}
 \label{sec:nodes}
 
-Just as we adjust aspects of the edges in our diagrams to tell us more information about the runs, we adjust aspects of the nodes as well. Building off of a rectangular shape that we use for clarity and organization, we alter the width, height, and the color of the node.
+Just as we adjust aspects of the edges in our diagrams to tell us more information about 
+the runs, we adjust aspects of the nodes as well. Starting form a simple rectangular 
+shape, we alter the width, height, and the color of the node.
 
-The width of a node is based on the individual's number of selections. This is the number of times an individual was selected to have a child in the overall run, not just in the ancestry tree. One thing to note about this is that an individual can be both parents of a child, in which case it would be counted as two selections. A node that is very wide will have an overall high number of selections. This tells us the individual was selected often or was \textit{hyperselected}~\cite{Helmuth:2016:GECCO}, which may be a point of interest for further investigations. 
-
-The height of a node is based on the individual's number of ancestry children. Similar to the opacity of an edge, the more children a node has in this ancestry tree, the taller the node.
+The width of a node is based on the individual's number of selections. This is the number 
+of times an individual was selected to be a parent. A node that is very wide will have an 
+overall high number of selections, and thus be a parent of many children; not all of those
+children will necessary be displayed in this graph, so it's possible to have very wide
+nodes with few displayed children. A very wide node is also a clear indicator of
+\emph{hyperselected} individuals~\cite{Helmuth:2016:GECCO} which often play very
+important roles in the dynamics of runs using lexicase selection.
+The height of a node is based on how many children an individual has this ancestry
+graph. Similar to the opacity of an edge, the more children a node has in this ancestry 
+tree, the taller the node.
 
 In the following graphs, we illustrate the use of two different coloring 
 schemes for nodes, each of which conveys information about the errors 
@@ -314,7 +352,7 @@ schemes for nodes, each of which conveys information about the errors
 The first, \emph{dual coloring}, uses color to represent success on the 
 two distinct types of errors (see Section~\ref{sec:testEnv}). The second,
 \emph{RBM coloring}, uses restricted Boltzmann machines (RBMs) to compress
-the 200 error values into three RGB color values.
+the 200 error values into 24-bit RGB color values.
 
 The \emph{dual coloring} approach uses hue-saturation-lightness (HSL) coloring
 based on the ``success'' of a given individual. 
