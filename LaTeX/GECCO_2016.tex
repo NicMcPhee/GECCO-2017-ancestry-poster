@@ -211,9 +211,9 @@ implementation\footnote{\url{https://github.com/lspector/Clojush}} of the
 PushGP genetic programming (GP) system~\cite{1068292,spector:2002:GPEM}, 
 but all of the ideas here
 could easily apply to almost any evolutionary computation system. The use
-of graph databases to capture ancestor lineage is a completely general
-concept, for example, and could be applied to any system that implements a
-notion of descent with modification. Some of the specifics of the visualization
+of graph databases to capture ancestor lineages is a completely general
+concept and could be applied to any system that implements a
+notion of descent with modification. Some of the visualization specifics
 are tied to particular metrics (e.g., the Damerau--Levenshtein distance
 between linear genomes), but these could be replaced with other
 metrics as appropriate to the application domain (e.g., manhattan distances
@@ -221,8 +221,8 @@ between genetic algorithms bitstrings, or tree edit distances in
 tree-based GP).
 
 One important feature of the PushGP system is the use of \emph{lexicase
-selection}~\cite{Helmuth:2015:ieeeTEC}. One of the goals in the design of
-lexicase selection was the preservation of diversity of behaviors. The
+selection}~\cite{Helmuth:2015:ieeeTEC}. One of the design goals for
+lexicase selection was the preservation of behavior diversity. The
 ancestry information in the graph databases and in the tree visualizations 
 in this paper can be used to visually and quantitatively check how
 well those goals are being met. One property of lexicase selection is
@@ -241,7 +241,7 @@ will focus here on a single test problem: Replace Space With Newline.
 In Replace Space With Newline the goal is to evolve a program that takes a string
 as input and has two tasks: (a) it should print the input string, with all spaces
 replaced by newlines, and (b) it should return an integer that is the number of
-characters in the input string that were \emph{not} replaced. The use of
+characters in the input string that were \emph{not} replaced. The existance of
 these two distinct types of error values will be used in some of the visualizations
 as described in Section~\ref{sec:nodes}. 
 
@@ -249,7 +249,9 @@ The details of the system and settings used in these runs are as described
 in~\cite{Helmuth:2015:GECCO}. There are, however, two parameters that are 
 directly relevant to these visualizations: The population size was 1,000, and the runs were stopped after 300 generations if a successful individual was not 
 found. This means that we were storing and processing considerable information
-on up to 300,000 individuals.
+on up to 300,000 individuals per run. We have also generated visualizations on runs
+in other settings where there were over a million individuals; these graphs are too
+large to meaningful include in a paper such as this.
 
 \section{Basic Graph Structure}
 \label{sec:basics}
