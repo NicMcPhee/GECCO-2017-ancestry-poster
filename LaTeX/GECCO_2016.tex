@@ -253,10 +253,15 @@ on up to 300,000 individuals per run. We have also generated visualizations on r
 in other settings where there were over a million individuals; these graphs are too
 large to meaningful include in a paper such as this.
 
-\section{Basic Graph Structure}
+\section{Visualizing ancestry graphs}
 \label{sec:basics}
 
-\begin{figure}[b]
+Our primary visualization of these evolutionary computation runs is via ancestry trees
+where individuals are represented as nodes, and parent-child relationships are 
+represented as edges. An example of this basic structure is illustrated in 
+Figure \ref{fig:lexRun0Basic}. 
+
+\begin{figure}
 	\begin{center}
 		\includegraphics[width=\linewidth]{../Figures/run0_basic_structure.pdf}
 	\end{center}
@@ -264,14 +269,27 @@ large to meaningful include in a paper such as this.
 	\label{fig:lexRun0Basic}
 \end{figure}
 
-These evolutionary computation runs are shown in the form of their ancestry trees. For a successful run, where at least one individual has found a solution to the problem, we obtain the ancestry tree by finding all individuals who have discovered a solution in the final generation. With these individuals, we go back through the generations to retrieve their parents, grandparents, etc. until we have every ancestor of these individuals, from start to finish. In an unsuccessful run, where no individual has found a solution to the problem, we take all of the individuals in the last generation (limited to 300 generations) and create a tree out of their ancestors.
+For a successful run, where at least one individual has found a solution to the problem, we 
+obtain the ancestry tree by first finding all individuals who have discovered a solution in the 
+final generation. With these individuals, we go back through the generations to retrieve 
+their parents, grandparents, etc. until we have every ancestor of these individuals, from 
+start to finish. In an unsuccessful run, where no individual has found a solution to the 
+problem, we take all of the individuals in the last generation 
+and create a tree out of their ancestors.
 
-Each ancestry tree diagram is composed of nodes and edges, where the nodes represent individuals and the edges represent their parent-child relationships. An example of this basic structure is in Figure \ref{fig:lexRun0Basic}. Improving upon this basic structure, we modify aspects of the edges and nodes such as color and size to show more information about individuals and relationships in each run.
+The visualization in Figure~\ref{fig:lexRun0Basic} captures the basic ancestry structure,
+but conveys no information about the particular individuals, or their relationships. In
+the remainder of this section we'll describe several techniques which greatly increase
+information density of the visualizations.
 
 \subsection{Edges}
 \label{sec:edges}
 
-As stated previously, edges show the parent-child relationship in our ancestry diagrams. We've modified aspects of the edges such as color, style, width, and transparency to tell us more information about these runs. The color and style of an edge is based on what operator was used to create a child. Here is the list of relations as \textbf{Style \& Color: Operator}.
+As stated previously, edges show the parent-child relationship in our ancestry diagrams. 
+To increase the amount of information conveyed in these visualizations, however, we
+use aspects of the edges such as color, style, width, and transparency to convey
+more information about these runs.  First, we use the color and style of an edge to 
+indicate what operator or combination of operators was used to create a child:
 \begin{itemize}
 \setlength\itemsep{0em}
 \item Solid \& Black: Alternation, followed by Uniform Mutation
@@ -280,15 +298,25 @@ As stated previously, edges show the parent-child relationship in our ancestry d
 \item Dashed \& Orange: Uniform Closed Mutation
 \end{itemize}
 
-The width of an edge is determined by the Damerau--Levenshtein distance~\cite{wiki:DLdist} between a parent's and child's genome.\footnote{The Clojush system uses linear Plush genomes that are then converted to PushGP programs. All genetic operations act on these genomes.} We use this as a measure to determine how similar a child is to its parent. The smaller the Damerau--Levenshtein distance, the more similar their genomes are. With edges, if a child is similar to its parent, the wider the edge will be. In converse, the more dissimilar a child is from its parent, the thinner the edge will be.
+The width of an edge is determined by the Damerau--Levenshtein 
+distance~\cite{wiki:DLdist} between a parent's and child's genome.\footnote{The Clojush 
+	system uses linear Plush genomes that are then converted to PushGP programs. All genetic operations act on these genomes.} 
+We use the Damerau--Levenshtein distance as a measure of how similar a child is to its 
+parent; the smaller this distance, the more similar their genomes. Since we want to
+emphasize strong parent-child relationships, we set the edge to be width of the edge
+to be inversely proportionate to the distance; if a child is similar to its parent, 
+the wider the edge will be, and larger distances will result in thinner edges.
 
-The last aspect of edges is their transparency. We based this on the number of ancestry children an individual had. Meaning, an incoming edge is more opaque if the individual had many children in the current ancestry tree. This helps us find the parents of popular individuals since these edges are more opaque than others.
+The last aspect of edges is their transparency, which we based on the number children an 
+individual has in this graph. An incoming edge is more opaque if the individual has many 
+children in the current ancestry tree. This helps us find the parents of individuals that have
+many children in the displayed tree since these edges are more opaque than others.
 
 \begin{figure*}
 	\begin{center}
 		\includegraphics[width=\textwidth]{../Figures/run0_dual_and_RBM_full.pdf}
 	\end{center}
-	\caption{Dual Colored (left) and RBM Colored (right) versions of a successful lexicase run ancestry tree.}
+	\caption{Dual Colored (left) and RBM Colored (right) versions of a successful lexicase run (run 0) ancestry tree.}
 	\label{fig:lexRun0DualAndRBM}
 \end{figure*}
 
@@ -303,11 +331,20 @@ The last aspect of edges is their transparency. We based this on the number of a
 \subsection{Nodes}
 \label{sec:nodes}
 
-Just as we adjust aspects of the edges in our diagrams to tell us more information about the runs, we adjust aspects of the nodes as well. Building off of a rectangular shape that we use for clarity and organization, we alter the width, height, and the color of the node.
+Just as we adjust aspects of the edges in our diagrams to tell us more information about 
+the runs, we adjust aspects of the nodes as well. Starting form a simple rectangular 
+shape, we alter the width, height, and the color of the node.
 
-The width of a node is based on the individual's number of selections. This is the number of times an individual was selected to have a child in the overall run, not just in the ancestry tree. One thing to note about this is that an individual can be both parents of a child, in which case it would be counted as two selections. A node that is very wide will have an overall high number of selections. This tells us the individual was selected often or was \textit{hyperselected}~\cite{Helmuth:2016:GECCO}, which may be a point of interest for further investigations. 
-
-The height of a node is based on the individual's number of ancestry children. Similar to the opacity of an edge, the more children a node has in this ancestry tree, the taller the node.
+The width of a node is based on the individual's number of selections. This is the number 
+of times an individual was selected to be a parent. A node that is very wide will have an 
+overall high number of selections, and thus be a parent of many children; not all of those
+children will necessary be displayed in this graph, so it's possible to have very wide
+nodes with few displayed children. A very wide node is also a clear indicator of
+\emph{hyperselected} individuals~\cite{Helmuth:2016:GECCO} which often play very
+important roles in the dynamics of runs using lexicase selection.
+The height of a node is based on how many children an individual has this ancestry
+graph. Similar to the opacity of an edge, the more children a node has in this ancestry 
+tree, the taller the node.
 
 In the following graphs, we illustrate the use of two different coloring 
 schemes for nodes, each of which conveys information about the errors 
@@ -315,7 +352,7 @@ schemes for nodes, each of which conveys information about the errors
 The first, \emph{dual coloring}, uses color to represent success on the 
 two distinct types of errors (see Section~\ref{sec:testEnv}). The second,
 \emph{RBM coloring}, uses restricted Boltzmann machines (RBMs) to compress
-the 200 error values into three RGB color values.
+the 200 error values into 24-bit RGB color values.
 
 The \emph{dual coloring} approach uses hue-saturation-lightness (HSL) coloring
 based on the ``success'' of a given individual. 
