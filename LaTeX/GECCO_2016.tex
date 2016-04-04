@@ -283,6 +283,22 @@ The width of an edge is determined by the Damerau--Levenshtein distance~\cite{wi
 
 The last aspect of edges is their transparency. We based this on the number of ancestry children an individual had. Meaning, an incoming edge is more opaque if the individual had many children in the current ancestry tree. This helps us find the parents of popular individuals since these edges are more opaque than others.
 
+\begin{figure*}
+	\begin{center}
+		\includegraphics[width=\textwidth]{../Figures/run0_dual_and_RBM_full.pdf}
+	\end{center}
+	\caption{Dual Colored (left) and RBM Colored (right) versions of a successful lexicase run ancestry tree.}
+	\label{fig:lexRun0DualAndRBM}
+\end{figure*}
+
+\begin{figure*}
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{../Figures/run1_RBM_color_filtered_and_full_60000.pdf}
+	\end{center}
+	\caption{Unfiltered (left) and filtered (right) versions of a successful run (run 1), both with the same color map.}
+	\label{fig:lexRun1FilteredAndFull}
+\end{figure*}
+
 \subsection{Nodes}
 \label{sec:nodes}
 
@@ -299,14 +315,6 @@ The first, \emph{dual coloring}, uses color to represent success on the
 two distinct types of errors (see Section~\ref{sec:testEnv}). The second,
 \emph{RBM coloring}, uses restricted Boltzmann machines (RBMs) to compress
 the 200 error values into three RGB color values.
-
-\begin{figure*}
-	\begin{center}
-		\includegraphics[width=\textwidth]{../Figures/run0_dual_and_RBM_full.pdf}
-	\end{center}
-	\caption{Dual Colored (left) and RBM Colored (right) versions of a successful lexicase run ancestry tree.}
-	\label{fig:lexRun0DualAndRBM}
-\end{figure*}
 
 The \emph{dual coloring} approach uses hue-saturation-lightness (HSL) coloring
 based on the ``success'' of a given individual. 
@@ -359,7 +367,6 @@ same major changes in its color scheme. It's coloring also shows more variation 
 coloring in the first half of the run, where the low brightness in the dual color
 graph limits the visible variations.
 
-
 \section{Filtering}
 \label{sec:filtering}
 
@@ -376,14 +383,6 @@ coloring of nodes highlight some major events in the history of the run. There
 are, however, large sections of the graph composed of hundreds of very small 
 nodes that make it very difficult to trace through and discover what might be 
 the most important paths through that part of the genetic history.
-
-\begin{figure*}[tb]
-	\begin{center}
-		\includegraphics[width=0.9\textwidth]{../Figures/run1_RBM_color_filtered_and_full_60000.pdf}
-	\end{center}
-	\caption{Unfiltered (left) and filtered (right) versions of a successful run, both with the same color map.}
-	\label{fig:lexRun1FilteredAndFull}
-\end{figure*}
 
 An obvious approach to this problem is to filter the results, we have
 already been using one simple filtering throughout the paper. In all the
@@ -497,6 +496,22 @@ decreasing number of mostly linear ancestries. At the end of the run there are
 visual indications of major discoveries that lead to large hyperselection events that
 dominate the dynamics in the last few generations.
 
+\begin{figure*}
+	\begin{center}
+		\includegraphics[height=0.95\textheight]{../Figures/runs_1_99_6_RBM_color_filtered3.pdf}
+	\end{center}
+	\caption{Filtered ancestry graphs of three successful runs (left to right, runs 1, 99, and 6), all with the same color map.}
+	\label{fig:runs1:99:6:filtered}
+\end{figure*}
+
+\begin{figure*}
+	\begin{center}
+		\includegraphics[height=.8\textheight]{../Figures/runs_92_2_1_99_dual_color_full_better_18ft.pdf}
+	\end{center}
+	\caption{Full ancestry graphs of 4 different runs (left to right, runs 92, 2, 1, and 99), all with the same color map.}
+	\label{fig:runs92:2:1:99:filtered}
+\end{figure*}
+
 \section{Comparing runs}
 \label{sec:comparisons}
 
@@ -530,19 +545,6 @@ All have one or more ``knots'' where there are higher degrees of connectivity fo
 generations before returning to the more linear ancestries. The end of all three runs
 feature several very strong hyperselection events.
 
-\begin{figure*}[tb]
-	\begin{center}
-		\includegraphics[height=0.95\textheight]{../Figures/runs_1_99_6_RBM_color_filtered3.pdf}
-	\end{center}
-	\caption{Filtered ancestry graphs of three successful runs (left to right, runs 1, 99, and 6), all with the same color map.}
-	\label{fig:runs1:99:6:filtered}
-\end{figure*}
-
-% In the section we'll look at least one successful and failed run in dual
-% coloring. This will allow us to see how individuals are prgressing (or not)
-% over time. Having these ancestries in full will allow us to generally comapre
-% the generation sizes and get the visual impact of a failed run.
-
 \subsection{Successful vs. Failed Runs}
 
 Figure~\ref{fig:runs92:2:1:99:filtered} shows the full unfiltered ancestries for four
@@ -566,14 +568,6 @@ the graph. The other three runs, however, have a variety of highly selected indi
 and associated changes in the shape of their graphs. It's possible, therefore, that run
 92 might have eventually discovered a solution if given more generations,
 where run 2 seems much less likely to make progress.
-
-\begin{figure*}[tb]
-	\begin{center}
-		\includegraphics[height=.8\textheight]{../Figures/runs_92_2_1_99_dual_color_full_better_18ft.pdf}
-	\end{center}
-	\caption{Full ancestry graphs of 4 different runs (left to right, runs 92, 2, 1, and 99), all with the same color map.}
-	\label{fig:runs92:2:1:99:filtered}
-\end{figure*}
 
 \section{Future work}
 \label{sec:futurework}
