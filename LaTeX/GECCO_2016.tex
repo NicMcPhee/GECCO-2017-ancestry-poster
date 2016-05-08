@@ -3,31 +3,13 @@
 \usepackage{times}
 \usepackage{url}
 \usepackage{todonotes}
-\linespread{.97}
+\linespread{.98}
 \newcommand{\squeezeup}{\vspace{-2mm}}
 \sloppy
 
 \setlength{\parindent}{0.5cm} 
 
 \newcommand{\citep}[1]{\cite{#1}}
-
-% Copyright
-\setcopyright{acmcopyright}
-%\setcopyright{acmlicensed}
-%\setcopyright{rightsretained}
-%\setcopyright{usgov}
-%\setcopyright{usgovmixed}
-%\setcopyright{cagov}
-%\setcopyright{cagovmixed}
-
-
-% DOI
-\doi{10.475/123_4}
-
-% ISBN
-\isbn{123-4567-24-567/08/06}
-
-\acmPrice{\$15.00}
 
 % You need the command \numberofauthors to handle the 'placement
 % and alignment' of the authors beneath the title.
@@ -55,9 +37,6 @@
 
 \begin{document}
 
-\conferenceinfo{GECCO'16,} {July 20-24, 2016, Denver, Colorado, USA.}
-\CopyrightYear{2016}
-\crdata{TBA}
 \clubpenalty=10000
 \widowpenalty = 10000
 
@@ -98,6 +77,12 @@ Lee Spector\\
 	\email{lspector@hampshire.edu}
 }
 
+\CopyrightYear{2016} 
+\setcopyright{acmlicensed}
+\conferenceinfo{GECCO'16 Companion,}{July 20 - 24, 2016, Denver, CO, USA}
+\isbn{978-1-4503-4323-7/16/07}\acmPrice{\$15.00}
+\doi{http://dx.doi.org/10.1145/2908961.2931741}
+
 \maketitle
 
 \begin{abstract}
@@ -123,40 +108,40 @@ understand the key dynamics.
 
 \end{abstract}
 
-\begin{CCSXML}
-	<ccs2012>
-	<concept>
-	<concept_id>10003120.10003145.10003146.10010892</concept_id>
-	<concept_desc>Human-centered computing~Graph drawings</concept_desc>
-	<concept_significance>500</concept_significance>
-	</concept>
-	<concept>
-	<concept_id>10003120.10003145.10003147.10010364</concept_id>
+%\begin{CCSXML}
+%	<ccs2012>
+%	<concept>
+%	<concept_id>10003120.10003145.10003146.10010892</concept_id>
+%	<concept_desc>Human-centered computing~Graph drawings</concept_desc>
+%	<concept_significance>500</concept_significance>
+%	</concept>
+%	<concept>
+%	<concept_id>10003120.10003145.10003147.10010364</concept_id>
+%
+%	<concept_desc>Human-centered computing~Scientific visualization</concept_desc>
+%	<concept_significance>500</concept_significance>
+%	</concept>
+%	<concept>
+%	<concept_id>10010147.10010178.10010205.10010206</concept_id>
+%	<concept_desc>Computing methodologies~Heuristic function construction</concept_desc>
+%	<concept_significance>300</concept_significance>
+%	</concept>
+%	<concept>
+%	<concept_id>10010147.10010257.10010293.10011809.10011813</concept_id>
+%	<concept_desc>Computing methodologies~Genetic programming</concept_desc>
+%	<concept_significance>300</concept_significance>
+%	</concept>
+%	</ccs2012>
+%\end{CCSXML}
 
-	<concept_desc>Human-centered computing~Scientific visualization</concept_desc>
-	<concept_significance>500</concept_significance>
-	</concept>
-	<concept>
-	<concept_id>10010147.10010178.10010205.10010206</concept_id>
-	<concept_desc>Computing methodologies~Heuristic function construction</concept_desc>
-	<concept_significance>300</concept_significance>
-	</concept>
-	<concept>
-	<concept_id>10010147.10010257.10010293.10011809.10011813</concept_id>
-	<concept_desc>Computing methodologies~Genetic programming</concept_desc>
-	<concept_significance>300</concept_significance>
-	</concept>
-	</ccs2012>
-\end{CCSXML}
+%\ccsdesc[500]{Human-centered computing~Graph drawings}
+%\ccsdesc[500]{Human-centered computing~Scientific visualization}
+%\ccsdesc[300]{Computing methodologies~Heuristic function construction}
+%\ccsdesc[300]{Computing methodologies~Genetic programming}
+%
+%\printccsdesc
 
-\ccsdesc[500]{Human-centered computing~Graph drawings}
-\ccsdesc[500]{Human-centered computing~Scientific visualization}
-\ccsdesc[300]{Computing methodologies~Heuristic function construction}
-\ccsdesc[300]{Computing methodologies~Genetic programming}
-
-\printccsdesc
-
-\keywords{visualization; genetic programming; ancestry; lineage}
+%\keywords{visualization; genetic programming; ancestry; lineage}
 
 \section{Introduction}
 \label{sec:introduction}
@@ -569,6 +554,8 @@ periods, which eventually develop into a relatively small set of largely linear 
 All have one or more ``knots'' where there are higher degrees of connectivity for several 
 generations before returning to the more linear ancestries. The end of all three runs
 feature several very strong hyperselection events.
+
+\pagebreak
 
 \subsection{Successful vs. Failed Runs}
 
