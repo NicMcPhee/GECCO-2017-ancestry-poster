@@ -3,29 +3,13 @@
 \usepackage{times}
 \usepackage{url}
 \usepackage{todonotes}
+\linespread{.98}
+\newcommand{\squeezeup}{\vspace{-2mm}}
 \sloppy
 
 \setlength{\parindent}{0.5cm} 
 
 \newcommand{\citep}[1]{\cite{#1}}
-
-% Copyright
-\setcopyright{acmcopyright}
-%\setcopyright{acmlicensed}
-%\setcopyright{rightsretained}
-%\setcopyright{usgov}
-%\setcopyright{usgovmixed}
-%\setcopyright{cagov}
-%\setcopyright{cagovmixed}
-
-
-% DOI
-\doi{10.475/123_4}
-
-% ISBN
-\isbn{123-4567-24-567/08/06}
-
-\acmPrice{\$15.00}
 
 % You need the command \numberofauthors to handle the 'placement
 % and alignment' of the authors beneath the title.
@@ -53,48 +37,51 @@
 
 \begin{document}
 
-\conferenceinfo{GECCO'16,} {July 20-24, 2016, Denver, Colorado, USA.}
-\CopyrightYear{2016}
-\crdata{TBA}
 \clubpenalty=10000
 \widowpenalty = 10000
 
-\title{Visualizing genetic programming ancestries using graph databases}
+\title{Visualizing Genetic Programming Ancestries}
 
-%\numberofauthors{5}
-%\author{
-%\alignauthor
-%Nicholas Freitag McPhee\\
-%	\affaddr{Div. of Science and Math}\\
-%	\affaddr{Univ. of Minnesota, Morris}\\
-%	\affaddr{Morris, MN USA-56267}\\
-%	\email{mcphee@morris.umn.edu}
-%\alignauthor
-%Maggie M. Casale\\
-%	\affaddr{Div. of Science and Math}\\
-%	\affaddr{Univ. of Minnesota, Morris}\\
-%	\affaddr{Morris, MN USA-56267}\\
-%	\email{casal033@morris.umn.edu}
-%\alignauthor
-%Mitchell Finzel \\
-%	\affaddr{Div. of Science and Math}\\
-%	\affaddr{Univ. of Minnesota, Morris}\\
-%	\affaddr{Morris, MN USA-56267}\\
-%	\email{finze008@morris.umn.edu}
-%\and
-%\alignauthor
-%Thomas Helmuth\\
-%	\affaddr{Computer Science Dep't}\\
-%	\affaddr{Washington and Lee Univ.}\\
-%	\affaddr{Lexington, VA USA-24450}\\
-%	\email{helmutht@wlu.edu}
-%\alignauthor
-%Lee Spector\\
-%	\affaddr{Cognitive Science}\\
-%	\affaddr{Hampshire College}\\
-%	\affaddr{Amherst, MA USA-01002}\\
-%	\email{lspector@hampshire.edu}
-%}
+\numberofauthors{5}
+\author{
+\alignauthor
+Nicholas Freitag McPhee\\
+	\affaddr{Div. of Science and Math}\\
+	\affaddr{Univ. of Minnesota, Morris}\\
+	\affaddr{Morris, MN USA-56267}\\
+	\email{mcphee@morris.umn.edu}
+\alignauthor
+Maggie M. Casale\\
+	\affaddr{Div. of Science and Math}\\
+	\affaddr{Univ. of Minnesota, Morris}\\
+	\affaddr{Morris, MN USA-56267}\\
+	\email{casal033@morris.umn.edu}
+\alignauthor
+Mitchell Finzel \\
+	\affaddr{Div. of Science and Math}\\
+	\affaddr{Univ. of Minnesota, Morris}\\
+	\affaddr{Morris, MN USA-56267}\\
+	\email{finze008@morris.umn.edu}
+\and
+\alignauthor
+Thomas Helmuth\\
+	\affaddr{Computer Science Dep't}\\
+	\affaddr{Washington and Lee Univ.}\\
+	\affaddr{Lexington, VA USA-24450}\\
+	\email{helmutht@wlu.edu}
+\alignauthor
+Lee Spector\\
+	\affaddr{Cognitive Science}\\
+	\affaddr{Hampshire College}\\
+	\affaddr{Amherst, MA USA-01002}\\
+	\email{lspector@hampshire.edu}
+}
+
+\CopyrightYear{2016} 
+\setcopyright{acmlicensed}
+\conferenceinfo{GECCO'16 Companion,}{July 20 - 24, 2016, Denver, CO, USA}
+\isbn{978-1-4503-4323-7/16/07}\acmPrice{\$15.00}
+\doi{http://dx.doi.org/10.1145/2908961.2931741}
 
 \maketitle
 
@@ -105,13 +92,11 @@ for collecting, analyzing, and visualizing ancestry in evolutionary computation 
 That work focused on sections of individual runs, whereas this paper 
 illustrates the application of these ideas on the entirety of large runs 
 (up to three hundred thousand individuals) and combinations of multiple runs.
-
 Here we use these tools to generate graphs showing \emph{all} the 
 ancestors of successful individuals from a variety of stack-based 
 genetic programming runs on software synthesis problems. These graphs 
 highlight important moments in the evolutionary process. They also 
 allow us to compare the dynamics for successful and unsuccessful runs.
-
 As well as displaying these full ancestry graphs, we use a
 variety of standard techniques such as size, color, pattern,
 labeling, and opacity to visualize other important information such as fitness, 
@@ -123,45 +108,45 @@ understand the key dynamics.
 
 \end{abstract}
 
-\begin{CCSXML}
-	<ccs2012>
-	<concept>
-	<concept_id>10003120.10003145.10003146.10010892</concept_id>
-	<concept_desc>Human-centered computing~Graph drawings</concept_desc>
-	<concept_significance>500</concept_significance>
-	</concept>
-	<concept>
-	<concept_id>10003120.10003145.10003147.10010364</concept_id>
+%\begin{CCSXML}
+%	<ccs2012>
+%	<concept>
+%	<concept_id>10003120.10003145.10003146.10010892</concept_id>
+%	<concept_desc>Human-centered computing~Graph drawings</concept_desc>
+%	<concept_significance>500</concept_significance>
+%	</concept>
+%	<concept>
+%	<concept_id>10003120.10003145.10003147.10010364</concept_id>
+%
+%	<concept_desc>Human-centered computing~Scientific visualization</concept_desc>
+%	<concept_significance>500</concept_significance>
+%	</concept>
+%	<concept>
+%	<concept_id>10010147.10010178.10010205.10010206</concept_id>
+%	<concept_desc>Computing methodologies~Heuristic function construction</concept_desc>
+%	<concept_significance>300</concept_significance>
+%	</concept>
+%	<concept>
+%	<concept_id>10010147.10010257.10010293.10011809.10011813</concept_id>
+%	<concept_desc>Computing methodologies~Genetic programming</concept_desc>
+%	<concept_significance>300</concept_significance>
+%	</concept>
+%	</ccs2012>
+%\end{CCSXML}
 
-	<concept_desc>Human-centered computing~Scientific visualization</concept_desc>
-	<concept_significance>500</concept_significance>
-	</concept>
-	<concept>
-	<concept_id>10010147.10010178.10010205.10010206</concept_id>
-	<concept_desc>Computing methodologies~Heuristic function construction</concept_desc>
-	<concept_significance>300</concept_significance>
-	</concept>
-	<concept>
-	<concept_id>10010147.10010257.10010293.10011809.10011813</concept_id>
-	<concept_desc>Computing methodologies~Genetic programming</concept_desc>
-	<concept_significance>300</concept_significance>
-	</concept>
-	</ccs2012>
-\end{CCSXML}
+%\ccsdesc[500]{Human-centered computing~Graph drawings}
+%\ccsdesc[500]{Human-centered computing~Scientific visualization}
+%\ccsdesc[300]{Computing methodologies~Heuristic function construction}
+%\ccsdesc[300]{Computing methodologies~Genetic programming}
+%
+%\printccsdesc
 
-\ccsdesc[500]{Human-centered computing~Graph drawings}
-\ccsdesc[500]{Human-centered computing~Scientific visualization}
-\ccsdesc[300]{Computing methodologies~Heuristic function construction}
-\ccsdesc[300]{Computing methodologies~Genetic programming}
-
-\printccsdesc
-
-\keywords{visualization; genetic programming; graph database; ancestry; lineage}
+%\keywords{visualization; genetic programming; ancestry; lineage}
 
 \section{Introduction}
 \label{sec:introduction}
 
-Reporting of results in genetic programming (GP) and evolutionary computation 
+Reporting of results in genetic programming (GP) and evolutionary computation (EC)
 research is frequently limited to aggregate statistics such as mean best fitness or 
 percentage of successful runs. Unfortunately this fails to convey the complex 
 dynamics of such evolutionary systems and obscures or omits potentially valuable 
@@ -172,26 +157,26 @@ often, a question that summary statistics rarely shed any light on.
 
 One way to move past the limitations of summary statistics is to collect ancestry
 information on runs, recording and analyzing parent--child 
-relationships~\cite{burlacu2013visualization,cruz2015elicit,hart2001gavel,vaseux2013event}. \
+relationships~\cite{burlacu2013visualization,cruz2015elicit,vaseux2013event}. \
 Most previous ancestry
-work has been limited to fairly small datasets, however, in part because of the
+work in EC has been limited to fairly small datasets, however, in part because of the
 challenges of storing and working effectively and efficiently with the hundreds of thousands of
-ancestry relationships present in most evolutionary computation runs.
+ancestry relationships present in most EC runs.
 
-Previous work~\cite{McPhee:2015:GPTP} has demonstrated the utility of graph databases as 
+Previous work~\cite{McPhee:2015:GPTP} has shown the utility of graph databases as 
 tools for collecting and analyzing large collections of ancestry data from GP runs,
 helping to identify key moments in runs, and general behavioral trends. That work,
 however, was focused on sections of individual runs. In this paper we illustrate the 
 use of these tools as a means of visualizing and exploring entire 
 ancestry trees, as well as combinations of ancestry trees. 
 We use the Titan graph database\footnote{\url{http://
-thinkaurelius.github.io/titan/}} along with the Gremlin shell and the Tinkerpop query 
+thinkaurelius.github.io/titan/}} along with the Tinkerpop query 
 tools\footnote{\url{https://tinkerpop.apache.org/}} to store the parent-child 
 relationships from genetic programming runs, and to extract the ancestry trees of 
 specified individuals. We then visualize these subgraphs using the Graphviz \texttt{dot} 
 graph layout tool.\footnote{\url{http://www.graphviz.org/}}
 
-In the next section (Section~\ref{sec:testEnv}) we will describe the test
+In the next section we will describe the test
 environment used to generate the data used in this paper. Section~\ref{sec:basics}
 describes the basic graph structure used in these visualizations, including
 detailed descriptions of how the rendering of edges and nodes conveys additional
@@ -203,14 +188,14 @@ runs side-by-side, illustrating similarities and differences in the run dynamics
 We wrap up with some ideas for future work in Section~\ref{sec:futurework} and
 conclusions in Section~\ref{sec:conclusions}.
 
-\section{Our test environment: PushGP \& Replace Space With Newline}
+\section{Our test environment}
 \label{sec:testEnv}
 
 All the visualizations presented here are on runs using the Clojush
 implementation\footnote{\url{https://github.com/lspector/Clojush}} of the 
 PushGP genetic programming (GP) system~\cite{1068292,spector:2002:GPEM}, 
 but all of the ideas here
-could easily apply to almost any evolutionary computation system. The use
+could easily apply to almost any evolutionary computation (EC) system. The use
 of graph databases to capture ancestor lineages is a completely general
 concept and could be applied to any system that implements a
 notion of descent with modification. Some of the visualization specifics
@@ -234,14 +219,14 @@ and consequently be a parent of nearly all the children in the next generation.
 These hyperselection events will be visually obvious in our graph visualizations
 below.
 
-We have applied the visualizations described here on a 
+We have applied these visualizations to a 
 number of different problems taken from a suite of software synthesis benchmark 
 problems~\cite{Helmuth:2015:GECCO}, but in the interest of space we
 will focus here on a single test problem: Replace Space With Newline.
-In Replace Space With Newline the goal is to evolve a program that takes a string
+In this problem the goal is to evolve a program that takes a string
 as input and has two tasks: (a) it should print the input string, with all spaces
 replaced by newlines, and (b) it should return an integer that is the number of
-characters in the input string that were \emph{not} replaced. The existance of
+characters in the input string that were \emph{not} replaced. The existence of
 these two distinct types of error values will be used in some of the visualizations
 as described in Section~\ref{sec:nodes}. 
 
@@ -251,16 +236,15 @@ directly relevant to these visualizations: The population size was 1,000, and th
 found. This means that we were storing and processing considerable information
 on up to 300,000 individuals per run. We have also generated visualizations on runs
 in other settings where there were over a million individuals; these graphs are too
-large to meaningful include in a paper such as this.
+large to meaningfully include in a paper such as this.
 
 \section{Visualizing ancestry graphs}
 \label{sec:basics}
 
-Our primary visualization of these evolutionary computation runs is via ancestry trees
+Our primary visualization of these EC runs is via ancestry trees
 where individuals are represented as nodes, and parent-child relationships are 
 represented as edges. An example of this basic structure is illustrated in 
 Figure \ref{fig:lexRun0Basic}. 
-
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=\linewidth]{../Figures/run0_basic_structure.pdf}
@@ -268,16 +252,13 @@ Figure \ref{fig:lexRun0Basic}.
 	\caption{Basic layout of ancestry trees, showing parent-child relationships. Generations are labeled on the left-hand side and run from generation 0 (the start of the run) at the top down to the end of the run at the bottom.}
 	\label{fig:lexRun0Basic}
 \end{figure}
-
-For a successful run, where at least one individual has found a solution to the problem, we 
-obtain the ancestry tree by first finding all individuals who have discovered a solution in the 
-final generation. With these individuals, we go back through the generations to retrieve 
-their parents, grandparents, etc. until we have every ancestor of these individuals, from 
+For a successful run, where at least one individual has found a solution, we 
+obtain the ancestry tree by first finding all successful individuals in the
+final generation. We go back through the generations to retrieve these individuals'
+parents, grandparents, etc. until we have every ancestor from 
 start to finish. In an unsuccessful run, where no individual has found a solution to the 
 problem, we take all of the individuals in the last generation 
-and create a tree out of their ancestors.
-
-The visualization in Figure~\ref{fig:lexRun0Basic} captures the basic ancestry structure,
+and create a tree out of their ancestors. The visualization in Figure~\ref{fig:lexRun0Basic} captures the basic ancestry structure,
 but conveys no information about the particular individuals, or their relationships. In
 the remainder of this section we'll describe several techniques which greatly increase
 information density of the visualizations.
@@ -291,7 +272,7 @@ use aspects of the edges such as color, style, width, and transparency to convey
 more information about these runs.  First, we use the color and style of an edge to 
 indicate what operator or combination of operators was used to create a child:
 \begin{itemize}
-\setlength\itemsep{0em}
+\setlength\itemsep{-.5em}
 \item Solid \& Black: Alternation, followed by Uniform Mutation
 \item Dashed \& Black: Alternation
 \item Solid \& Orange: Uniform Mutation
@@ -299,9 +280,9 @@ indicate what operator or combination of operators was used to create a child:
 \end{itemize}
 
 The width of an edge is determined by the Damerau--Levenshtein 
-distance~\cite{wiki:DLdist} between a parent's and child's genome.\footnote{The Clojush 
+distance between a parent's and child's genome.\footnote{The Clojush 
 	system uses linear Plush genomes that are then converted to PushGP programs. All genetic operations act on these genomes.} 
-We use the Damerau--Levenshtein distance as a measure of how similar a child is to its 
+We use this as a measure of how similar a child is to its 
 parent; the smaller this distance, the more similar their genomes. Since we want to
 emphasize strong parent-child relationships, we set the edge to be width of the edge
 to be inversely proportionate to the distance; if a child is similar to its parent, 
@@ -316,7 +297,9 @@ many children in the displayed tree since these edges are more opaque than other
 	\begin{center}
 		\includegraphics[width=\textwidth]{../Figures/run0_dual_and_RBM_full.pdf}
 	\end{center}
+	\squeezeup
 	\caption{Dual Colored (left) and RBM Colored (right) versions of a successful lexicase run (run 0) ancestry tree.}
+	\squeezeup
 	\label{fig:lexRun0DualAndRBM}
 \end{figure*}
 
@@ -383,7 +366,7 @@ interpreted as 24-bit RGB colors. This allowed us to see valuable relationships
 between individuals that were successful on similar sets of test cases. 
 
 Figure~\ref{fig:lexRun0DualAndRBM} shows both color schemes side-by-side on the same
-ancestry tree from a short, successful run. Both colorings clearly highlight major
+ancestry tree from a short, successful run. Both colorings highlight major
 changes in the error vectors over time, but in different ways. In the center of the 
 dual color graph, for example, there is a large individual that is purple on the left
 side and green on the right, with the green indicating a major improvement on the
@@ -401,8 +384,7 @@ version of the behavior of its purple-green ancestor from five generations earli
 
 The RBM coloring on the right hand side of Figure~\ref{fig:lexRun0DualAndRBM} does not
 capture the differences between the two types of test cases, but still reflects the
-same major changes in its color scheme. It's coloring also shows more variation in the
-coloring in the first half of the run, where the low brightness in the dual color
+same major changes in its color scheme. Its coloring also shows more variation in the first half of the run, where the low brightness in the dual color
 graph limits the visible variations.
 
 \section{Filtering}
@@ -470,20 +452,10 @@ expected.
 
 The method used here was based on the Damerau--Levenshtein distance between the
 parent and child genomes. Our filtering algorithm was fairly simplistic: Assume we have two parents, $p$ and $q$, and a child $c$ such that
-\begin{align*}
-	a & = \textrm{DL-distance}(p, c) \\
-	b & = \textrm{DL-distance}(q, c) \\
-	s & = \textrm{genome-length}(c)
-\end{align*}
+$a=\textrm{DL-distance}(p, c)$, $b~=~\textrm{DL-distance}(q, c)$, and 
+$s=\textrm{genome-length}(c)$,
 and assume without loss of generality that $a \leq b$.
-Then filter out parent $q$ if either:
-\[
-	a < 0.2 \times s
-\]
-for some constant $\lambda$, or
-\[
-	b \geq 2 \times a.
-\]
+Then filter out parent $q$ if either $a < 0.2 \times s$ or $b \geq 2 \times a$.
 Thus parent $q$ will be filtered out if parent $p$ is particularly close to
 the child, or if parent $q$ is more than twice as far away from the child as
 parent $p$. The choices of the constants $0.2$ and $2$ are obviously somewhat
@@ -583,6 +555,8 @@ All have one or more ``knots'' where there are higher degrees of connectivity fo
 generations before returning to the more linear ancestries. The end of all three runs
 feature several very strong hyperselection events.
 
+\pagebreak
+
 \subsection{Successful vs. Failed Runs}
 
 Figure~\ref{fig:runs92:2:1:99:filtered} shows the full unfiltered ancestries for four
@@ -600,7 +574,7 @@ random populations for the two unsuccessful runs have very dark colors on the
 right hand sides of their nodes, indicating that the most selected initial individuals
 had \emph{very} high total error on the integer return cases.
 
-After the initial settingling out, run 2 has no
+After the initial settling out, run 2 has no
 significant hyperselection events, and no substantial changes in the visual structure of
 the graph. The other three runs, however, have a variety of highly selected individuals,
 and associated changes in the shape of their graphs. It's possible, therefore, that run
@@ -610,7 +584,7 @@ where run 2 seems much less likely to make progress.
 \section{Future work}
 \label{sec:futurework}
 
-Two major related issues in this work so far are (a) the static nature of the figures and (b) the 
+Two major issues in this work so far are the static nature of the figures and the 
 challenges of displaying and working with such large, dense graphs. Static visualizations are not 
 inherently bad, and are obviously important for things like print work. There is, however, only so
 much data that can be compressed into static visualizations such as this, and it would certainly be
@@ -624,8 +598,7 @@ A further application of these ideas would be to use these graphs to compare the
 evolutionary systems using, for example, different selection mechanisms. Previous 
 research~\cite{McPhee:2015:GPTP} has compared the dynamics of sections of runs using
 tournament selection and lexicase selection; this work could be extended to compare
-the ancestry graphs of entire runs. Similarly, these tools could be used to compare
-the dynamics of lexicase runs and autoconstruction runs~\cite{Spector:2016:GECCO}.
+the ancestry graphs of entire runs. 
 
 \section{Conclusions}
 \label{sec:conclusions}
@@ -640,15 +613,15 @@ understanding properties of important tools such as selection operators and can 
 guide the development of new techniques based on a more detailed understanding of the
 behavior of evolutionary systems.
 
-%\section{Acknowledgments}
-%
-%This material is based upon work supported by the National Science Foundation under 
-%Grants No. 1129139 and 1331283. Any opinions, findings, and conclusions or recommendations 
-%expressed in this publication are those of the authors and do not necessarily reflect the views of the 
-%National Science Foundation.
-%
-%Thanks to William Tozier for numerous suggestions and support. Thanks also to the 
-%members of the Computational Intelligence Lab at Hampshire College for ideas and feedback.
+\section{Acknowledgments}
+
+This material is based upon work supported by the National Science Foundation under 
+Grants No. 1129139 and 1331283. Any opinions, findings, and conclusions or recommendations 
+expressed in this publication are those of the authors and do not necessarily reflect the views of the 
+National Science Foundation.
+
+Thanks to William Tozier for numerous suggestions and support. Thanks also to the 
+members of the Computational Intelligence Lab at Hampshire College for ideas and feedback.
 
 \bibliographystyle{abbrv}
 \bibliography{GECCO_2016}
