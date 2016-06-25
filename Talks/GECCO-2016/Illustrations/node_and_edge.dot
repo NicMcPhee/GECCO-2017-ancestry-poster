@@ -1,0 +1,3 @@
+digraph G { 
+"Individual" [fontsize=20, shape=rectangle, width=1.0, height=0.75, style=filled, fillcolor=gray85, label="       Node       "];
+}

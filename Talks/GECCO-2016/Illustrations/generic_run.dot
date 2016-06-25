@@ -1,0 +1,37 @@
+digraph G { 
+"Gen 0" -> "Gen 1" -> "..." -> " ... " -> "  ...  " -> "Gen N" [style=invis];
+node[shape=point, width=0.15, height=0.15, fillcolor="white", penwidth=1, label=""];
+edge[arrowsize=0.5, color="grey", penwidth=1, style="solid"];
+"Random_Program" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label="Random Program"];
+"Random_Program1" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label="Random Program"];
+"Random_Program2" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label="Random Program"];
+"Random_Program3" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label="Random Program"];
+"empty1" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label="Child Program"];
+"empty1_1" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label="Child Program"];
+"empty1_2" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label="Child Program"];
+"empty2" [fontsize=20, shape=oval, width=1.0, height=0.75, style=invis, fillcolor=white, label="2"];
+"empty2_1" [fontsize=20, shape=oval, width=1.0, height=0.75, style=invis, fillcolor=white, label="2"];
+"empty2_2" [fontsize=20, shape=oval, width=1.0, height=0.75, style=invis, fillcolor=white, label="2"];
+"empty3" [fontsize=20, shape=oval, width=1.0, height=0.75, style=invis, fillcolor=white, label="3"];
+"empty4" [fontsize=20, shape=oval, width=1.0, height=0.75, style=invis, fillcolor=white, label="4"];
+"Winner" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label="Winner"];
+"Random_Program" -> "empty1" [color="#000000", penwidth=3.0, style="dotted"];
+"Random_Program1" -> "empty1" [color="#000000", penwidth=3.0, style="dotted"];
+"Random_Program2" -> "empty1_1" [color="#000000", penwidth=3.0, style="dotted"];
+"Random_Program3" -> "empty1_2" [color="#000000", penwidth=3.0, style="dotted"];
+"Random_Program3" -> "empty1_1" [color="#000000", penwidth=3.0, style="dotted"];
+"empty1_1" -> "empty2" [color="#000000", penwidth=3.0, style="dotted"];
+"empty1_2" -> "empty2_1" [color="#000000", penwidth=3.0, style="dotted"];
+"empty1" -> "empty2_2" [color="#000000", penwidth=3.0, style="dotted"];
+"empty2" -> "empty3" [color="#000000", penwidth=3.0, style="invis"];
+"empty2_1" -> "empty3" [color="#000000", penwidth=3.0, style="invis"];
+"empty2_2" -> "empty3" [color="#000000", penwidth=3.0, style="invis"];
+"empty3" -> "empty4" [color="#000000", penwidth=3.0, style="invis"];
+"empty4" -> "Winner" [color="#000000", penwidth=3.0, style="dotted"];
+{ rank=same; "Gen 0", "Random_Program" }
+{ rank=same; "Gen 1", "empty1" }
+{ rank=same; "...", "empty2" }
+{ rank=same; " ... ", "empty3" }
+{ rank=same; "  ...  ", "empty4" }
+{ rank=same; "Gen N", "Winner" }
+}

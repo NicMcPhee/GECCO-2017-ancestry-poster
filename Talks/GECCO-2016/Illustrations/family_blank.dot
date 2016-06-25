@@ -1,0 +1,35 @@
+digraph G { 
+node[shape=point, width=0.15, height=0.15, fillcolor="white", penwidth=1, label=""];
+edge[arrowsize=0.5, color="grey", penwidth=1, style="solid"];
+"empty_1" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=gray69, label=""];
+"empty_2" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=gray69, label=""];
+"empty_3" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=gray69, label=""];
+"Great_Great_Great_Grandma_mom" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label="Great Great Great Grandma"];
+"Great_Great_Great_Grandpa_mom" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label="Great Great Great Grandpa"];
+"Great_Great_Grandma_mom" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label="Great Great Grandma"];
+"Great_Great_Grandpa_mom" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label="Great Great Grandpa"];
+"Great_Grandma_mom" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label="Great Grandma"];
+"Great_Grandpa_mom" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label="Great Grandpa"];
+"Grandma_mom" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label="Grandma"];
+"Grandpa_mom" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label="Grandpa"];
+"Grandma_dad" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label="Grandma"];
+"Grandpa_dad" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label="Grandpa"];
+"Mom" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label="Mom"];
+"Dad" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label="Dad"];
+"You" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label="You"];
+"Great_Great_Great_Grandma_mom" -> "Great_Great_Grandma_mom" [color="#000000", penwidth=3.0, style="solid"];
+"Great_Great_Great_Grandpa_mom" -> "Great_Great_Grandma_mom" [color="#000000", penwidth=3.0, style="solid"];
+"Great_Great_Grandma_mom" -> "Great_Grandpa_mom" [color="#000000", penwidth=3.0, style="solid"];
+"Great_Great_Grandpa_mom" -> "Great_Grandpa_mom" [color="#000000", penwidth=3.0, style="solid"];
+"Great_Grandma_mom" -> "Grandma_mom" [color="#000000", penwidth=3.0, style="solid"];
+"Great_Grandpa_mom" -> "Grandma_mom" [color="#000000", penwidth=3.0, style="solid"];
+"empty_1" -> "Grandma_dad" [color="#000000", penwidth=3.0, style="dotted"];
+"empty_2" -> "Grandpa_dad" [color="#000000", penwidth=3.0, style="dotted"];
+"empty_3" -> "Grandpa_mom" [color="#000000", penwidth=3.0, style="dotted"];
+"Grandma_mom" -> "Mom" [color="#000000", penwidth=3.0, style="solid"];
+"Grandpa_mom" -> "Mom" [color="#000000", penwidth=3.0, style="solid"];
+"Grandma_dad" -> "Dad" [color="#000000", penwidth=3.0, style="solid"];
+"Grandpa_dad" -> "Dad" [color="#000000", penwidth=3.0, style="solid"];
+"Mom" -> "You" [color="#000000", penwidth=3.0, style="solid"];
+"Dad" -> "You" [color="#000000", penwidth=3.0, style="solid"];
+}

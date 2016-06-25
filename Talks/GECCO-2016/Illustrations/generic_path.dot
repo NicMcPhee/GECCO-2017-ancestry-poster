@@ -1,0 +1,42 @@
+digraph G { 
+"Gen 0" -> "Gen 1" -> "Gen 2" -> "Gen 3" -> "Gen 4" -> "Gen 5" [style=invis];
+node[shape=point, width=0.15, height=0.15, fillcolor="white", penwidth=1, label=""];
+edge[arrowsize=0.5, color="grey", penwidth=1, style="solid"];
+"empty_1" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=gray69, label=""];
+"empty_2" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=gray69, label=""];
+"empty_3" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=gray69, label=""];
+"Great_Great_Great_Grandma_mom" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label=""];
+"Great_Great_Great_Grandpa_mom" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=olivedrab1, label=""];
+"Great_Great_Grandma_mom" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=olivedrab1, label=""];
+"Great_Great_Grandpa_mom" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label=""];
+"Great_Grandma_mom" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label=""];
+"Great_Grandpa_mom" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=olivedrab1, label=""];
+"Grandma_mom" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=olivedrab1, label=""];
+"Grandpa_mom" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label=""];
+"Grandma_dad" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label=""];
+"Grandpa_dad" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label=""];
+"Mom" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=olivedrab1, label=""];
+"Dad" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=white, label=""];
+"You" [fontsize=20, shape=oval, width=1.0, height=0.75, style=filled, fillcolor=olivedrab1, label=""];
+"Great_Great_Great_Grandma_mom" -> "Great_Great_Grandma_mom" [color="#000000", penwidth=3.0, style="solid"];
+"Great_Great_Great_Grandpa_mom" -> "Great_Great_Grandma_mom" [color="#000000", penwidth=3.0, style="solid"];
+"Great_Great_Grandma_mom" -> "Great_Grandpa_mom" [color="#000000", penwidth=3.0, style="solid"];
+"Great_Great_Grandpa_mom" -> "Great_Grandpa_mom" [color="#000000", penwidth=3.0, style="solid"];
+"Great_Grandma_mom" -> "Grandma_mom" [color="#000000", penwidth=3.0, style="solid"];
+"Great_Grandpa_mom" -> "Grandma_mom" [color="#000000", penwidth=3.0, style="solid"];
+"empty_1" -> "Grandma_dad" [color="#000000", penwidth=3.0, style="dotted"];
+"empty_2" -> "Grandpa_dad" [color="#000000", penwidth=3.0, style="dotted"];
+"empty_3" -> "Grandpa_mom" [color="#000000", penwidth=3.0, style="dotted"];
+"Grandma_mom" -> "Mom" [color="#000000", penwidth=3.0, style="solid"];
+"Grandpa_mom" -> "Mom" [color="#000000", penwidth=3.0, style="solid"];
+"Grandma_dad" -> "Dad" [color="#000000", penwidth=3.0, style="solid"];
+"Grandpa_dad" -> "Dad" [color="#000000", penwidth=3.0, style="solid"];
+"Mom" -> "You" [color="#000000", penwidth=3.0, style="solid"];
+"Dad" -> "You" [color="#000000", penwidth=3.0, style="solid"];
+{ rank=same; "Gen 0", "Great_Great_Great_Grandma_mom" }
+{ rank=same; "Gen 1", "Great_Great_Grandma_mom" }
+{ rank=same; "Gen 2", "Great_Grandma_mom" }
+{ rank=same; "Gen 3", "Grandma_mom" }
+{ rank=same; "Gen 4", "Mom" }
+{ rank=same; "Gen 5", "You" }
+}
