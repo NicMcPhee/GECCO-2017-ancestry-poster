@@ -169,7 +169,7 @@ GP Runs:
 \begin{itemize}
     \item 1,000 individuals per generation
     \item Up to 300 generations here, 
-    	\\ \hspace{.5cm} over 1,000 generations in other cases
+    	\\ \hspace{.5cm} Over 1,000 generations in other cases
         \\ \hspace{.5cm} 100Ks or millions of individuals
 \end{itemize}
 \end{frame}
@@ -198,7 +198,7 @@ We have hundreds of runs of this problem which we'll use as examples throughout 
 \begin{frame}{Database schema}
 Used TitanDB graph database to store our data.
 \vspace{.5cm}
-\begin{columns}
+\begin{columns}[t]
 % Column 1
 \begin{column}{0.45\textwidth}
 Nodes = individuals
@@ -223,7 +223,7 @@ Edges = parent-child relationships
 		\item Genetic operator
 		\item Damerau-Levenshtein distance
 	\end{itemize}
-    \vspace{2cm} % Pushes up second column
+%    \vspace{2cm} % Pushes up second column
 \end{column}
 \end{columns}
 \end{frame}
@@ -394,12 +394,12 @@ Nodes represent an individual or program:
 \begin{frame}{Restricted Boltzmann Machine Node Coloring}
 \centering
 \includegraphics[width=.85\textwidth]{Illustrations/run0_RBM_color_full_30000.pdf} \\
-Dimensionality Reduction Problem: 200 test cases $\rightarrow$ 3 RGB values
+Dimensionality Reduction Problem: 200 test cases $\rightarrow$ 24 bit RGB color
 \end{frame}
 
 \begin{frame}{Restricted Boltzmann Machine Technique}
 \centering
-Train an RBM as a simple autoencoder: 200 inputs to 3 outputs
+Train an RBM to be a simple autoencoder: \\ 200 inputs to 24 bits to 3 RGB color values
 \vspace{1em}
 
 \setbeamertemplate{itemize item}{}% Remove item bullets for this frame
@@ -472,8 +472,8 @@ So we filter out parents who did not contribute much genetic information.
 
 Much more ``readable'':
 \begin{itemize}
-	\item 1,597 individuals
-    \item 1,795 edges
+	\item 1,597 individuals (vs 22,435)
+    \item 1,795 edges (vs 35,403)
     \item Avg. branching factor of 1.1
 \end{itemize}
 
@@ -549,8 +549,8 @@ These visualizations have:
     \end{itemize}
 	\item Enable more dynamic visualizations 
     \begin{itemize}
-    	\item Deep Tree exhibit~\cite{DeepTree}
-        \item Burlacu's work
+    	\item Deep Tree exhibit~\cite{block2012deeptree}
+        \item Burlacu's work~\cite{Burlacu:CIEES:2015}
     \end{itemize}
     \item Enable more ``on-line'' visualization during runs
 \end{itemize}
