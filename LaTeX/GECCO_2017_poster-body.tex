@@ -7,25 +7,27 @@ In this poster we illustrate the use of these tools as a means of exploring enti
 \section{Example: Success vs. failure}
 \label{sec:examples}
 
+Here we illustrate these ideas by extracting and plotting the ancestors of final generation individuals in both a successful (Figure~\ref{fig:success}) and an unsuccessful run (Figure~\ref{fig:fail}) of the replace-space-with-newline software synthesis problem~\cite{Helmuth:2015:GECCO,Helmuth:2015:dissertation} using lexicase selection~\cite{Helmuth:2014:ieeeTEC}. The successful run shows all the ancestors of that run's winners (i.e., individuals with total error 0, discovered at generation 129). The unsuccessful run shows the ancestors of all individuals from generation 300, when the run was terminated; the ancestry graph in Figure~\ref{fig:fail} is truncated at generation 200 for space reasons, but the run was unsuccessful up to generation 300.
+
 \begin{figure}[t]
 	\centering
-	\includegraphics[height=0.5 \textheight]{../Figures/output_success.pdf}
+	\includegraphics[height=0.45 \textheight]{../Figures/output_success.pdf}
 	\caption{Ancestry tree for the one individual with total error 0 in a successful run of the replace-space-with-newline problem using lexicase selection.}
 	\label{fig:success}
+	\vspace{-0.25cm}
 \end{figure}
 
-Here we illustrate these ideas by extracting and plotting the ancestors of final generation individuals in both a successful (Figure~\ref{fig:success}) and an unsuccessful run (Figure~\ref{fig:fail}) of the replace-space-with-newline software synthesis problem~\cite{Helmuth:2015:GECCO,Helmuth:2015:dissertation} using lexicase selection~\cite{Helmuth:2014:ieeeTEC}. The successful run shows all the ancestors of that run's winners (i.e., individuals with total error 0, discovered at generation 129). The unsuccessful run shows the ancestors of all individuals from generation 300, when the run was terminated.
-
-\begin{figure}[p]
+\begin{figure}[tb]
 	\centering
-	\includegraphics[height=0.91\textheight]{../Figures/output_fail.pdf}
-	\caption{Ancestry tree for all of the individuals in the final generation for an unsuccessful run of the replace-space-with-newline problem using lexicase selection.}
+	\includegraphics[height=0.7\textheight]{../Figures/output_fail_200.pdf}
+	\caption{Ancestry tree for all of the individuals in the final generation for an unsuccessful run of the replace-space-with-newline problem using lexicase selection. This graph is truncated at generation 200, but the run went to generation 300 without success, and with no major qualitative change in the graph.}
 	\label{fig:fail}
+	\vspace{-0.25cm}
 \end{figure}
 
 In both figures generations run from the initial population at the top to the final generation at the bottom, one generation per row. Both of these runs used a population size of 1,000, but far fewer individuals are included in the graphs because only a small subset of the individuals in any given generation go on to be ancestors of individuals in subsequent generations. Each individual is represented as a rectangle whose width is proportional to the number of parent selections that individual received, and whose height is proportional to the number of its offspring that are included in the ancestry graph. 
 % The ratio of width to number of selections is $\sfrac{1}{5}$ the ratio of height to number of ancestral children to keep the graph from getting too wide.
-The color of an individual is determined by its total error; 0 total error is bright green, moving through blues to bright red, which represents total error of 10,000 or greater. A directed edge in the graph indicates a parent-child relation, with the edge going from the parent down to the child. A child with only a single incoming edge is the result of a mutation operator and children with two incoming edges are the result of a recombination.
+The color of an individual is determined by its total error; 0 total error is bright green, moving through blues to bright red, which represents total error of 10,000 or greater. A directed edge in the graph indicates a parent-child relation, with the edge going from the parent down to the child. A child with only a single incoming edge is the result of a mutation operator and children with two incoming edges are the result of a recombination~\cite{Helmuth:2015:dissertation}.
 
 Both Figures~\ref{fig:success} and~\ref{fig:fail} illustrate a common pattern in the early generations where there is a substantial number of highly selected individuals (i.e., very wide rectangles). This is presumably because most individuals in the early generations perform poorly, as evidenced by the prevalence of red and pink, with a few slightly-less-bad individuals receiving the bulk of the selections. After several generations, however, the population gains competence (as evidenced by more purple and dark blue) and there are fewer instances where a single individual receives a very high proportion of the selection events, as evidenced by the large number of small rectangles.
 
