@@ -17,87 +17,66 @@
 %\setcopyright{none}
 %\setcopyright{acmcopyright}
 %\setcopyright{acmlicensed}
-\setcopyright{rightsretained}
+%\setcopyright{rightsretained}
 %\setcopyright{usgov}
 %\setcopyright{usgovmixed}
 %\setcopyright{cagov}
 %\setcopyright{cagovmixed}
 
-
-% DOI
-\acmDOI{10.475/123_4}
-
-% ISBN
-\acmISBN{123-4567-24-567/08/06}
-
-%Conference
-\acmConference[GECCO '17]{the Genetic and Evolutionary Computation Conference 2017}{July 15--19, 2017}{Berlin, Germany}
-\acmYear{2017}
 \copyrightyear{2017}
-
+\acmYear{2017}
+\setcopyright{acmlicensed}
+\acmConference{GECCO '17}{July 15-19, 2017}{Berlin, Germany}
 \acmPrice{15.00}
-
-% You need the command \numberofauthors to handle the 'placement
-% and alignment' of the authors beneath the title.
-%
-% For aesthetic reasons, we recommend 'three authors at a time'
-% i.e. three 'name/affiliation blocks' be placed beneath the title.
-%
-% NOTE: You are NOT restricted in how many 'rows' of
-% "name/affiliations" may appear. We just ask that you restrict
-% the number of 'columns' to three.
-%
-% Because of the available 'opening page real-estate'
-% we ask you to refrain from putting more than six authors
-% (two rows with three columns) beneath the article title.
-% More than six makes the first-page appear very cluttered indeed.
-%
-% Use the \alignauthor commands to handle the names
-% and affiliations for an 'aesthetic maximum' of six authors.
-% Add names, affiliations, addresses for
-% the seventh etc. author(s) as the argument for the
-% \additionalauthors command.
-% These 'additional authors' will be output/set for you
-% without further effort on your part as the last section in
-% the body of your article BEFORE References or any Appendices.
+\acmDOI{http://dx.doi.org/10.1145/3071178.3071330}
+\acmISBN{978-1-4503-4920-8/17/07}
 
 \begin{document}
 
 \title{Visualizing genetic programming ancestries using graph databases}
 
-%\numberofauthors{4}
-%\author{
-%\alignauthor
-%Nicholas Freitag McPhee\\
-%	\affaddr{Div. of Science and Math}\\
-%	\affaddr{Univ. of Minnesota, Morris}\\
-%	\affaddr{Morris, MN USA-56267}\\
-%	\email{mcphee@morris.umn.edu}
-%\alignauthor
-%Maggie M. Casale\\
-%	\affaddr{Div. of Science and Math}\\
-%	\affaddr{Univ. of Minnesota, Morris}\\
-%	\affaddr{Morris, MN USA-56267}\\
-%	\email{casal033@morris.umn.edu}
-%\and
-%\alignauthor
-%Thomas Helmuth\\
-%	\affaddr{Computer Science Dep't}\\
-%	\affaddr{Washington and Lee Univ.}\\
-%	\affaddr{Lexington, VA USA-24450}\\
-%	\email{helmutht@wlu.edu}
-%\alignauthor
-%Lee Spector\\
-%	\affaddr{Cognitive Science}\\
-%	\affaddr{Hampshire College}\\
-%	\affaddr{Amherst, MA USA-01002}\\
-%	\email{lspector@hampshire.edu}
-%}
+\author{Nicholas Freitag McPhee}
+\orcid{0000-0002-6495-2612}
+\affiliation{%
+	\institution{University of Minnesota, Morris}
+	% \streetaddress{600 E. 4th Street}
+	\city{Morris} 
+	\state{Minnesota} 
+	\country{USA}
+}
+\email{mcphee@morris.umn.edu}
+
+\author{Maggie M. Casale}
+\affiliation{
+	\institution{Design Center Inc.}
+	\city{St. Paul}
+	\state{Minnesota}
+	\country{USA}
+}
+\email{mcasale@designcenterideas.com}
+
+\author{Thomas Helmuth}
+\orcid{0000-0002-2330-6809}
+\affiliation{%
+	\institution{Washington and Lee University}
+	\city{Lexington} 
+	\state{Virginia} 
+	\country{USA}
+}
+\email{helmutht@wlu.edu}
+
+\author{Lee Spector}
+\affiliation{%
+	\institution{Hampshire College}
+	\city{Amherst}
+	\state{Massachusetts}
+	\country{USA}
+}
+\email{lspector@hampshire.edu}
 
 \begin{abstract}
 
 Previous work has demonstrated the utility of graph databases as a tool for collecting and analyzing ancestry in evolutionary computation runs. That work focused on sections of individual runs, whereas this poster illustrates the application of these ideas on the entirety of large runs (up to one million individuals) and combinations of multiple runs.
-
 Here we use these tools to generate graphs showing \emph{all} the ancestors of successful individuals from a variety of stack-based genetic programming runs on software synthesis problems. These graphs highlight important moments in the evolutionary process. They also allow us to compare the dynamics when using different evolutionary tools, such as different selection mechanisms or representations, as well as comparing the dynamics for successful and unsuccessful runs.
 
 \end{abstract}
