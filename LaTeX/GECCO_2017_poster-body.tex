@@ -2,8 +2,7 @@
 \label{sec:introduction}
 
 Reporting results of genetic programming (GP) and evolutionary computation is frequently limited to aggregate statistics such as mean best fitness or percentage of successful runs. Unfortunately this fails to convey the complex dynamics of such evolutionary systems and obscures or omits potentially valuable information about \emph{why} the runs behaved as they did. Previous work~\cite{McPhee:2015:GPTP} has demonstrated the utility of graph databases as tools for collecting and analyzing ancestry in GP runs, but was focused on sections of individual runs.
-
-In this poster we illustrate the use of these tools as a means of exploring entire ancestry trees. We use the Titan graph database\footnote{\url{http://titandb.io}} along with the Gremlin shell and the Tinkerpop query tools\footnote{\url{https://tinkerpop.apache.org/}} to store the parent-child relationships from genetic programming runs, and to extract the ancestry trees of specified individuals. We then visualize these subgraphs using the Graphviz \texttt{dot} graph layout tool\footnote{\url{http://www.graphviz.org/}}.
+In this poster we illustrate the use of these tools as a means of exploring entire ancestry trees. We use the Titan graph database\footnote{\url{http://titandb.io}} along with the Gremlin shell and the Tinkerpop query tools\footnote{\url{https://tinkerpop.apache.org/}} to store the parent-child relationships from genetic programming runs, and to extract the ancestry trees of specified individuals. We then visualize these subgraphs using the \textbf{\texttt{dot}} graph layout tool from the Graphviz  library.\footnote{\url{http://www.graphviz.org/}}
 
 \section{Example: Success vs. failure}
 \label{sec:examples}
