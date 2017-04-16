@@ -2,17 +2,17 @@
 \label{sec:introduction}
 
 Reporting results of genetic programming (GP) and evolutionary computation is frequently limited to aggregate statistics such as mean best fitness or percentage of successful runs. Unfortunately this fails to convey the complex dynamics of such evolutionary systems and obscures or omits potentially valuable information about \emph{why} the runs behaved as they did. Previous work~\cite{McPhee:2015:GPTP} has demonstrated the utility of graph databases as tools for collecting and analyzing ancestry in GP runs, but was focused on sections of individual runs.
-In this poster we illustrate the use of these tools as a means of exploring entire ancestry trees. We use the Titan graph database\footnote{\url{http://titandb.io}} along with the Gremlin shell and the Tinkerpop query tools\footnote{\url{https://tinkerpop.apache.org/}} to store the parent-child relationships from genetic programming runs, and to extract the ancestry trees of specified individuals. We then visualize these subgraphs using the \textbf{\texttt{dot}} graph layout tool from the Graphviz  library.\footnote{\url{http://www.graphviz.org/}}
+In this poster we illustrate the use of these tools as a means of exploring entire ancestry graphs. We use the Titan graph database along with the Gremlin shell and the Tinkerpop query tools to store the parent-child relationships from genetic programming runs, and to extract the ancestry graphs of specified individuals. We then visualize these subgraphs using the \textbf{\texttt{dot}} graph layout tool from the Graphviz  library.\footnote{\url{http://titandb.io}, \url{https://tinkerpop.apache.org/}, and \url{http://www.graphviz.org/}}
 
 \section{Example: Success vs. failure}
 \label{sec:examples}
 
-Here we illustrate these ideas by extracting and plotting the ancestors of final generation individuals in both a successful (Figure~\ref{fig:success}) and an unsuccessful run (Figure~\ref{fig:fail}) of the replace-space-with-newline software synthesis problem~\cite{Helmuth:2015:GECCO,Helmuth:2015:dissertation} using lexicase selection~\cite{Helmuth:2014:ieeeTEC}. The successful run shows all the ancestors of that run's winners (i.e., individuals with total error 0, discovered at generation 129). The unsuccessful run shows the ancestors of all individuals from generation 300, when the run was terminated; the ancestry graph in Figure~\ref{fig:fail} is truncated at generation 200 for space reasons, but the run was unsuccessful up to generation 300.
+Here we illustrate these ideas by extracting and plotting the ancestors of final generation individuals in both a successful (Figure~\ref{fig:success}) and an unsuccessful run (Figure~\ref{fig:fail}) of the Replace Space With Newline software synthesis problem~\cite{Helmuth:2015:GECCO,Helmuth:2015:dissertation} using lexicase selection. The successful run shows all the ancestors of that run's winners (i.e., individuals with total error 0, discovered at generation 129). The unsuccessful run shows the ancestors of all individuals from generation 300, when the run was terminated; the ancestry graph in Figure~\ref{fig:fail} is truncated at generation 200 for space reasons, but the run was unsuccessful up to generation 300.
 
 \begin{figure}[t]
 	\centering
 	\includegraphics[height=0.45 \textheight]{../Figures/output_success.pdf}
-	\caption{Ancestry tree for the one individual with total error 0 in a successful run of the replace-space-with-newline problem using lexicase selection.}
+	\caption{Ancestry graph for individual with total error 0 in successful run of the Replace Space With Newline problem.}
 	\label{fig:success}
 	\vspace{-0.25cm}
 \end{figure}
@@ -20,7 +20,7 @@ Here we illustrate these ideas by extracting and plotting the ancestors of final
 \begin{figure}[tb]
 	\centering
 	\includegraphics[height=0.7\textheight]{../Figures/output_fail_200.pdf}
-	\caption{Ancestry tree for all of the individuals in the final generation for an unsuccessful run of the replace-space-with-newline problem using lexicase selection. This graph is truncated at generation 200, but the run went to generation 300 without success, and with no major qualitative change in the graph.}
+	\caption{Ancestry graph for all of the individuals in the final generation for an unsuccessful run of the Replace Space With Newline problem. This graph is truncated at generation 200; the run went to generation 300 without success.}
 	\label{fig:fail}
 	\vspace{-0.25cm}
 \end{figure}
@@ -34,3 +34,7 @@ Both Figures~\ref{fig:success} and~\ref{fig:fail} illustrate a common pattern in
 After that initial phase, the behavior in the unsuccessful run (Figure~\ref{fig:fail}) becomes static, with the width of the graph (essentially the number of parents in each generation) remaining roughly constant, with no highly selected (i.e., wide) individuals. The colors also indicate that the total error is not improving substantially over time, remaining mostly between pink and purple. The best total error in fact remains at 234 from generation 16 to 270, although there is a gradual improvement in the last 30 generations with the best error at the end of the run being 215.
 
 In the successful run (Figure~\ref{fig:success}), however, there are clear changes in the dynamics over time. By generation 14 the best individual is able to correctly solve 124 of the 200 test cases. Then starting around generation 59 there is a ``narrowing'' of the graph, with several highly selected (i.e., wide) individuals dominating the ancestry for the next ten generations. This narrowing represents an important ``discovery'' which leads to individuals that have zero error on an additional 9\% (18) of the test cases. The graph then widens out again until the rapid convergence on the solution in the final generations. The graph also highlights three highly selected individuals in generation 87 where for the first time the best individual has zero error on an additional 18 test cases.
+
+\section*{Acknowledgements}
+
+This material is based upon work supported by the National Science Foundation under Grants No. 1617087, 1129139 and 1331283. Any opinions, findings, and conclusions or recommendations expressed in this publication are those of the authors and do not necessarily reflect the views of the National Science Foundation.
